@@ -18,17 +18,6 @@
 #define DEFAULT_SUSPEND_DEFER_TIME 	1
 #define STATE_NOTIFIER			"state_notifier"
 
-/*
- * debug = 1 will print all
- */
-static unsigned int debug;
-
-#define dprintk(msg...)		\
-do {				\
-	if (debug)		\
-		pr_info(msg);	\
-} while (0)
-
 static unsigned int suspend_defer_time = DEFAULT_SUSPEND_DEFER_TIME;
 module_param_named(suspend_defer_time, suspend_defer_time, uint, 0664);
 static struct delayed_work suspend_work;
@@ -78,14 +67,12 @@ static void _suspend_work(struct work_struct *work)
 	state_suspended = true;
 	state_notifier_call_chain(STATE_NOTIFIER_SUSPEND, NULL);
 	suspend_in_progress = false;
-	dprintk("%s: suspend completed.\n", STATE_NOTIFIER);
 }
 
 static void _resume_work(struct work_struct *work)
 {
 	state_suspended = false;
 	state_notifier_call_chain(STATE_NOTIFIER_ACTIVE, NULL);
-	dprintk("%s: resume completed.\n", STATE_NOTIFIER);
 }
 
 static void _boost_work(struct work_struct *work)
@@ -96,7 +83,6 @@ static void _boost_work(struct work_struct *work)
 
 void state_suspend(void)
 {
-	dprintk("%s: suspend called.\n", STATE_NOTIFIER);
 	if (state_suspended || suspend_in_progress)
 		return;
 
