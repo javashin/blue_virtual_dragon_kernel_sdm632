@@ -63,6 +63,7 @@
 static void sde_hw_setup_split_pipe(struct sde_hw_mdp *mdp,
 		struct split_pipe_cfg *cfg)
 {
+	struct sde_clk_ctrl_reg *ctrl_reg;
 	struct sde_hw_blk_reg_map *c;
 	u32 upper_pipe = 0;
 	u32 lower_pipe = 0;
@@ -180,8 +181,12 @@ static bool sde_hw_setup_clk_force_ctrl(struct sde_hw_mdp *mdp,
 	if (clk_ctrl <= SDE_CLK_CTRL_NONE || clk_ctrl >= SDE_CLK_CTRL_MAX)
 		return false;
 
-	reg_off = mdp->caps->clk_ctrls[clk_ctrl].reg_off;
-	bit_off = mdp->caps->clk_ctrls[clk_ctrl].bit_off;
+	ctrl_reg = (struct sde_clk_ctrl_reg *)&mdp->caps->clk_ctrls[clk_ctrl];
+	if (cmpxchg(&ctrl_reg->val, !enable, enable) == enable)
+		return enable;
+
+	reg_off = ctrl_reg->reg_off;
+	bit_off = ctrl_reg->bit_off;
 
 	reg_val = SDE_REG_READ(c, reg_off);
 
