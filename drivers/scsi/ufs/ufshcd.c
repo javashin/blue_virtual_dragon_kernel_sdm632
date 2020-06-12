@@ -610,7 +610,6 @@ static void ufshcd_cmd_log_init(struct ufs_hba *hba)
 	}
 }
 
-#ifdef CONFIG_TRACEPOINTS
 static void __ufshcd_cmd_log(struct ufs_hba *hba, char *str, char *cmd_type,
 			     unsigned int tag, u8 cmd_id, u8 idn, u8 lun,
 			     sector_t lba, int transfer_len)
@@ -639,7 +638,6 @@ static void __ufshcd_cmd_log(struct ufs_hba *hba, char *str, char *cmd_type,
 
 	ufshcd_add_command_trace(hba, entry);
 }
-#endif
 
 static void ufshcd_cmd_log(struct ufs_hba *hba, char *str, char *cmd_type,
 	unsigned int tag, u8 cmd_id, u8 idn)
@@ -3220,6 +3218,7 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 
 	err = ufshcd_map_sg(hba, lrbp);
 	if (err) {
+		ufshcd_release(hba, false);
 		lrbp->cmd = NULL;
 		clear_bit_unlock(tag, &hba->lrb_in_use);
 		ufshcd_release_all(hba);
@@ -5241,10 +5240,6 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
 	 */
 	if (!ufshcd_is_ufs_dev_active(hba))
 		link_startup_again = true;
-
-#ifdef CONFIG_SCSI_UFS_RESTRICT_TX_LANES
-	ufshcd_dme_set(hba, UIC_ARG_MIB(PA_AVAILTXDATALANES), 0x1);
-#endif
 
 link_startup:
 	do {
