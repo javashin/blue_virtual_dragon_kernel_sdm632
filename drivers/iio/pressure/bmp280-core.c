@@ -632,7 +632,7 @@ static int bmp180_measure(struct bmp280_data *data, u8 ctrl_meas)
 	unsigned int ctrl;
 
 	if (data->use_eoc)
-		reinit_completion(&data->done);
+		init_completion(&data->done);
 
 	ret = regmap_write(data->regmap, BMP280_REG_CTRL_MEAS, ctrl_meas);
 	if (ret)
@@ -888,9 +888,6 @@ static int bmp085_fetch_eoc_irq(struct device *dev,
 			"trying to enforce it\n");
 		irq_trig = IRQF_TRIGGER_RISING;
 	}
-
-	init_completion(&data->done);
-
 	ret = devm_request_threaded_irq(dev,
 			irq,
 			bmp085_eoc_irq,

@@ -3,6 +3,8 @@
 #
 
 obj-$(CONFIG_IBM_ASM)		+= ibmasm/
+obj-$(CONFIG_INPUT_AWINIC_HAPTIC)	+= awinic/
+obj-$(CONFIG_INPUT_DRV2624_HAPTICS)	+= drv2624_mmi.o
 obj-$(CONFIG_AD525X_DPOT)	+= ad525x_dpot.o
 obj-$(CONFIG_AD525X_DPOT_I2C)	+= ad525x_dpot-i2c.o
 obj-$(CONFIG_AD525X_DPOT_SPI)	+= ad525x_dpot-spi.o
@@ -60,6 +62,14 @@ obj-$(CONFIG_PANEL)             += panel.o
 obj-$(CONFIG_QPNP_MISC) 	+= qpnp-misc.o
 obj-$(CONFIG_FPR_FPC) 	+= fpr_FingerprintCard/
 obj-$(CONFIG_MEMORY_STATE_TIME)	+= memory_state_time.o
+obj-$(CONFIG_MOT_UTAG) += utag/
+obj-$(CONFIG_SARSENSOR_SX9331) += sx933x_sar.o
+obj-$(CONFIG_SARSENSOR_SX9325) += sx932x_sar.o
+obj-$(CONFIG_SARSENSOR_SX9310) += sx931x_triple.o
+EXTRA_CFLAGS += -DCONFIG_CAPSENSE_USB_CAL
+EXTRA_CFLAGS += -Idrivers/base
+
+
 
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
 obj-$(CONFIG_MEMORY_STATE_TIME)	+= memory_state_time.o
@@ -81,5 +91,7 @@ OBJCOPYFLAGS_lkdtm_rodata_objcopy.o := \
 targets += lkdtm_rodata.o lkdtm_rodata_objcopy.o
 $(obj)/lkdtm_rodata_objcopy.o: $(obj)/lkdtm_rodata.o FORCE
 	$(call if_changed,objcopy)
+
+obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
 obj-$(CONFIG_OKL4_LINK_SHBUF)    += okl4-link-shbuf.o
 obj-$(CONFIG_DROPBOX) += dropbox.o

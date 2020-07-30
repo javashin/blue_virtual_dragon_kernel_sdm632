@@ -3218,7 +3218,6 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 
 	err = ufshcd_map_sg(hba, lrbp);
 	if (err) {
-		ufshcd_release(hba);
 		lrbp->cmd = NULL;
 		clear_bit_unlock(tag, &hba->lrb_in_use);
 		ufshcd_release_all(hba);
@@ -5240,6 +5239,10 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
 	 */
 	if (!ufshcd_is_ufs_dev_active(hba))
 		link_startup_again = true;
+
+#ifdef CONFIG_SCSI_UFS_RESTRICT_TX_LANES
+	ufshcd_dme_set(hba, UIC_ARG_MIB(PA_AVAILTXDATALANES), 0x1);
+#endif
 
 link_startup:
 	do {
