@@ -721,8 +721,8 @@ int __vma_adjust(struct vm_area_struct *vma, unsigned long start,
 	struct rb_root *root = NULL;
 	struct anon_vma *anon_vma = NULL;
 	struct file *file = vma->vm_file;
-    struct uksm_vma_add_new(next);
-    struct uksm_vma_add_new(vma);
+               uksm_vma_add_new(next);
+               uksm_vma_add_new(vma);
 	bool start_changed = false, end_changed = false;
 	long adjust_next = 0;
 	int remove_next = 0;
