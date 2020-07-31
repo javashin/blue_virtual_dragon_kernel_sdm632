@@ -721,12 +721,9 @@ int __vma_adjust(struct vm_area_struct *vma, unsigned long start,
 	struct rb_root *root = NULL;
 	struct anon_vma *anon_vma = NULL;
 	struct file *file = vma->vm_file;
-               uksm_vma_add_new(next);
-               uksm_vma_add_new(vma);
 	bool start_changed = false, end_changed = false;
 	long adjust_next = 0;
 	int remove_next = 0;
-
 
 	/*
 	 * Why using vm_raw_write*() functions here to avoid lockdep's warning ?
@@ -898,7 +895,8 @@ again:
 		end_changed = true;
 	}
 	WRITE_ONCE(vma->vm_pgoff, pgoff);
-	if (adjust_next) {
+	
+        if (adjust_next) {
 		WRITE_ONCE(next->vm_start,
 			   next->vm_start + (adjust_next << PAGE_SHIFT));
 		WRITE_ONCE(next->vm_pgoff, next->vm_pgoff + adjust_next);
@@ -1031,15 +1029,18 @@ again:
 			 */
 			VM_WARN_ON(mm->highest_vm_end != vm_end_gap(vma));
 		}
-	}
+        } else {
+		if (next && !insert)
+			uksm_vma_add_new(next);
+}
 	if (insert && file)
 		uprobe_mmap(insert);
-
 	if (next && next != vma)
 		vm_raw_write_end(next);
 	if (!keep_locked)
 		vm_raw_write_end(vma);
 
+        uksm_vma_add_new(vma);
 	validate_mm(mm);
 
 	return 0;
