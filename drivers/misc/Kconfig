@@ -139,6 +139,17 @@ config INTEL_MID_PTI
 	  an Intel Atom (non-netbook) mobile device containing a MIPI
 	  P1149.7 standard implementation.
 
+config INPUT_DRV2624_HAPTICS
+	tristate "TI DRV2624 haptics support"
+	depends on INPUT && I2C
+	select INPUT_FF_MEMLESS
+	select REGMAP_I2C
+	help
+	  Say Y to enable support for the TI DRV2624 haptics driver.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called drv2624_mmi.
+
 config SGI_IOC4
 	tristate "SGI IOC4 Base IO support"
 	depends on PCI
@@ -334,6 +345,17 @@ config ISL29020
 
 	  This driver can also be built as a module.  If so, the module
 	  will be called isl29020.
+
+config MOT_UTAG
+	tristate  "Motorola Configuration read/write support "
+	default n
+	help
+	  With this option you get read/write access to utag partition via procfs.
+	  Content of the entire partition can be checked, separate utags accessed
+	  and modified.
+
+	  This driver should be built as a module. The module will be called
+	  utags.ko.
 
 config SENSORS_TSL2550
 	tristate "Taos TSL2550 ambient light sensor"
@@ -823,7 +845,29 @@ config DROPBOX
 	  in dropbox manager service.  This enables fast and simple logging of
 	  various critical events from kernel drivers.
 
+config SARSENSOR_SX9331
+	tristate "SARSENSOR SX9331"
+	default n
+	help
+	  Say Y here if you have a sar sensor SX9331 connected
+	  to your system.If unsure, say N.
+
+config SARSENSOR_SX9325
+	tristate "SARSENSOR SX9325"
+	default n
+	help
+	  Say Y here if you have a sar sensor SX9325 connected
+	  to your system.If unsure, say N.
+
+config SARSENSOR_SX9310
+	tristate "SARSENSOR SX9310"
+	default n
+	help
+	  Say Y here if you have a sar sensor SX9310 connected
+	  to your system.If unsure, say N.
+
 source "drivers/misc/c2port/Kconfig"
+source "drivers/misc/awinic/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
 source "drivers/misc/ti-st/Kconfig"
