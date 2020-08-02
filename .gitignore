@@ -31,6 +31,8 @@
 *.xz
 *.lz4
 *.lzo
+*.zst
+*.rej
 *.patch
 *.gcno
 *.ll
@@ -39,7 +41,7 @@ Module.symvers
 *.dwo
 *.su
 *.c.[012]*.*
-
+/OUT
 #
 # Top-level generic files
 #

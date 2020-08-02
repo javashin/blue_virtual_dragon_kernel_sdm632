@@ -485,11 +485,53 @@ config CC_STACKPROTECTOR_STRONG
 
 endchoice
 
+config POLLY_CLANG
+	bool "Enable clang Polly optimizations"
+	help
+	  This option enables Clang's polyhedral loop optimizer known as Polly.
+	  Polly is able to optimize various loops throughout the kernel for
+	  maximum cache locality. This requires a Clang toolchain compiled
+	  with support for Polly.
+
+	  For more information, see Polly's website: https://polly.llvm.org/
+
 config THIN_ARCHIVES
 	bool
 	help
 	  Select this if the architecture wants to use thin archives
 	  instead of ld -r to create the built-in.o files.
+
+choice
+	prompt "Kernel linker"
+	default LD_BFD
+	default LD_BFD if !LTO_CLANG
+	default LD_LLD if LTO_CLANG
+	help
+	  This option allows the linker used for linking the kernel to be
+	  customized as desired out of a list of supported linkers.
+
+config LD_BFD
+	bool "bfd"
+	depends on !LTO_CLANG
+	help
+	  Use the standard ld.bfd linker, which is the default and is part of
+	  GNU binutils.
+
+config LD_GOLD
+	bool "gold"
+	help
+	  Use the ld.gold linker, which is a part of GNU binutils. This may be
+	  desired for Clang LTO.
+
+config LD_LLD
+	bool "lld"
+	depends on LTO_CLANG
+        help
+	  Use the ld.lld linker, which is part of the LLVM project. This can be
+	  useful for Clang LTO as a replacement for ld.gold.
+
+endchoice
+
 
 config LD_DEAD_CODE_DATA_ELIMINATION
 	bool
@@ -512,13 +554,13 @@ config LTO
 config ARCH_SUPPORTS_LTO_CLANG
 	bool
 	help
-	  An architecture should select this option it supports:
+	  An architecture should select this option if it supports:
 	  - compiling with clang,
 	  - compiling inline assembly with clang's integrated assembler,
 	  - and linking with either lld or GNU gold w/ LLVMgold.
 
 choice
-	prompt "Link-Time Optimization (LTO) (EXPERIMENTAL)"
+	prompt "Link-Time Optimization (LTO)"
 	default LTO_NONE
 	help
 	  This option turns on Link-Time Optimization (LTO).
@@ -527,13 +569,13 @@ config LTO_NONE
 	bool "None"
 
 config LTO_CLANG
-	bool "Use clang Link Time Optimization (LTO) (EXPERIMENTAL)"
+    bool "Use clang Link Time Optimization (LTO)"
 	depends on ARCH_SUPPORTS_LTO_CLANG
 	depends on !FTRACE_MCOUNT_RECORD || HAVE_C_RECORDMCOUNT
 	depends on !KASAN
 	select LTO
 	select THIN_ARCHIVES
-	select LD_DEAD_CODE_DATA_ELIMINATION
+        select LD_LLD
 	help
           This option enables clang's Link Time Optimization (LTO), which allows
           the compiler to optimize the kernel globally at link time. If you
@@ -547,6 +589,17 @@ config LTO_CLANG
 
 endchoice
 
+config LTO_CLANG_THIN
+	bool "Use clang ThinLTO over full LTO"
+	depends on LTO_CLANG
+	help
+	  This option replaces clang's traditional full LTO with ThinLTO, which
+	  can be a fair compromise between full LTO and no LTO. ThinLTO compiles
+	  significantly faster, especially during incremental builds, while
+	  preserving a considerable amount of the performance gain of full LTO
+	  in most cases. This is typically useful for development but may not be
+	  desired for release builds.
+
 config CFI
 	bool
 
@@ -559,7 +612,7 @@ config CFI_PERMISSIVE
 	  CFI violations in drivers during development.
 
 config CFI_CLANG
-	bool "Use clang Control Flow Integrity (CFI) (EXPERIMENTAL)"
+	bool "Use clang Control Flow Integrity (CFI)"
 	depends on LTO_CLANG
 	depends on KALLSYMS
 	select CFI

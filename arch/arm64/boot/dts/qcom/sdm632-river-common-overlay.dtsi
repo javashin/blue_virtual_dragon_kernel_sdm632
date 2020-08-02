@@ -32,7 +32,7 @@
 				dev = "/dev/block/platform/soc/7824900.sdhci/by-name/vendor";
 				type = "ext4";
 				mnt_flags = "ro,barrier=1,discard";
-				fsmgr_flags = "wait,slotselect";
+				fsmgr_flags = "wait,verify,slotselect";
 				status = "ok";
 			};
 			system {
@@ -378,7 +378,6 @@
 	vsn_disp-supply = <&lcdb_ncp_vreg>;
 
 	qcom,platform-reset-gpio = <&tlmm 61 0>;
-	qcom,platform-hbm-en-gpio = <&tlmm 28 0>;
 };
 
 &mdss_dsi1 {
