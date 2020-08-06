@@ -86,12 +86,12 @@ echo "Set Normal Speed To Cooldown CPU After Compilation"
 rm ANYKERNEL/Image.gz-dtb
 cp /OUT/arch/arm64/boot/Image.gz-dtb ANYKERNEL/
 cd ANYKERNEL/
-rm OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r4-02-AUG-2020.zip
-zip -r9 OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r4-02-AUG-2020.zip * -x .git README.md *placeholder
-cp OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r4-02-AUG-2020.zip /home/
+rm OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r6-06-AUG-2020.zip
+zip -r9 OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r6-06-AUG-2020.zip * -x .git README.md *placeholder
+cp OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r6-06-AUG-2020.zip /home/
 ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
 ls -lash ./Image.gz-dtb
-ls -lash ./OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r4-02-AUG-2020.zip
+ls -lash ./OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon_r6-06-AUG-2020.zip
 
 echo "YAY"
 echo "KERNAL KERNAL KERNAL KERNAL KARNAL KARMA KARMA KARMA"
