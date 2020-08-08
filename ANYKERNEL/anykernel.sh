@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-#- JavaShin-X OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon MSM-4.9 -r27 For Moto G7 Power Ocean -#-
+kernel.string=-#- JavaShin-X OCEAN-KERNEL-4.9.232-Blue-Virtual-Dragon Caf MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
 do.devicecheck=1
 do.modules=0
 do.systemless=1
@@ -65,8 +65,8 @@ ui_print " "
 ui_print "Device: Moto G7 Power (OCEAN)"
 ui_print "Kernel Name: Custo-Kernal-JavaShin-X"
 ui_print "Build User: root = javashin"
-ui_print "KVer: 4.9.232-Blue-Virtual-Dragon_r6+ jsX-CustoKernal SMP PREEMPT aarch64"
-ui_print "Thu 06 August 2020"
+ui_print "KVer: 4.9.232-Blue-Virtual-Dragon_r7+ jsX-CustoKernal SMP PREEMPT aarch64"
+ui_print "Saturday 08 August 2020"
 ui_print "Toolchain Info:"
 ui_print "Proton clang version 12.0.0 LTO+PGO+POLLY Optimized Build by kdragOn"
 ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-3) "
