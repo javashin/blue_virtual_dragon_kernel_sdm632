@@ -65,12 +65,14 @@ ui_print " "
 ui_print "Device: Moto G7 Power (OCEAN)"
 ui_print "Kernel Name: Custo-Kernal-JavaShin-X"
 ui_print "Build User: root = javashin"
-ui_print "KVer: 4.9.232-Blue-Virtual-Dragon_r7+ jsX-CustoKernal SMP PREEMPT aarch64"
-ui_print "Saturday 08 August 2020"
+ui_print "KVer: 4.9.232-Blue-Virtual-Dragon_r8+ jsX-CustoKernal SMP PREEMPT aarch64"
+ui_print "Sunday 09 August 2020"
 ui_print "Toolchain Info:"
 ui_print "Proton clang version 12.0.0 LTO+PGO+POLLY Optimized Build by kdragOn"
-ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-3) "
+ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-3)"
+ui_print "Cross Linker Gnu Binutils 2.35 (Debian 2.35)"
 ui_print "CFLAGS/KBUILD_FLAGS=-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
+
 ui_print " "
 
 

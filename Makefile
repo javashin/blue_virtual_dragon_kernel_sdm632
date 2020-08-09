@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 232
-EXTRAVERSION = -Blue-Virtual-Dragon_r7+
+EXTRAVERSION = -Blue-Virtual-Dragon_r8+
 NAME = JavaShin-X Blue-Virtual-Dragon KERNEL. jsX-CustoKernal.
 
 

@@ -125,7 +125,7 @@ static void cluster_prepare(struct lpm_cluster *cluster,
 static bool print_parsed_dt;
 module_param_named(print_parsed_dt, print_parsed_dt, bool, 0664);
 
-static bool sleep_disabled;
+static bool sleep_disabled = true;
 module_param_named(sleep_disabled, sleep_disabled, bool, 0664);
 
 /**
@@ -643,7 +643,7 @@ static int cpu_power_select(struct cpuidle_device *dev,
 
 		lvl_latency_us = pwr_params->latency_us;
 
-		if (latency_us < lvl_latency_us)
+		if (latency_us <= lvl_latency_us)
 			break;
 
 		if (next_event_us) {
@@ -980,7 +980,7 @@ static int cluster_select(struct lpm_cluster *cluster, bool from_idle,
 					&level->num_cpu_votes))
 			continue;
 
-		if (from_idle && latency_us < pwr_params->latency_us)
+		if (from_idle && latency_us <= pwr_params->latency_us)
 			break;
 
 		if (sleep_us < pwr_params->time_overhead_us)
