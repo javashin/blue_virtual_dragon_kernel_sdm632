@@ -125,7 +125,7 @@ static void cluster_prepare(struct lpm_cluster *cluster,
 static bool print_parsed_dt;
 module_param_named(print_parsed_dt, print_parsed_dt, bool, 0664);
 
-static bool sleep_disabled = true;
+static bool sleep_disabled;
 module_param_named(sleep_disabled, sleep_disabled, bool, 0664);
 
 /**
@@ -1062,7 +1062,7 @@ static int cluster_configure(struct lpm_cluster *cluster, int idx,
 		 * LPMs(XO and Vmin).
 		 */
 		if (!from_idle)
-			clock_debug_print_enabled(true);
+			clock_debug_print_enabled(false);
 
 		cpu = get_next_online_cpu(from_idle);
 		cpumask_copy(&cpumask, cpumask_of(cpu));

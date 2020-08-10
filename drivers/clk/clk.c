@@ -1042,7 +1042,7 @@ static void clk_disable_unused_subtree(struct clk_core *core)
 	struct clk_core *child;
 	unsigned long flags;
 
-	lockdep_assert_held(&prepare_lock);
+	// lockdep_assert_held(&prepare_lock);
 
 	hlist_for_each_entry(child, &core->children, child_node)
 		clk_disable_unused_subtree(child);
