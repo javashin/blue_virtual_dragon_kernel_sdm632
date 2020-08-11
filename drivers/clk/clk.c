@@ -1003,7 +1003,7 @@ static void clk_unprepare_unused_subtree(struct clk_core *core)
 {
 	struct clk_core *child;
 
-	lockdep_assert_held(&prepare_lock);
+	// lockdep_assert_held(&prepare_lock);
 
 	hlist_for_each_entry(child, &core->children, child_node)
 		clk_unprepare_unused_subtree(child);

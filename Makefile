@@ -1,8 +1,8 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 232
-EXTRAVERSION = -Blue-Virtual-Dragon_r9+
-NAME = JavaShin-X Blue-Virtual-Dragon KERNEL. jsX-CustoKernal.
+EXTRAVERSION = -Blue-Virtual-Dragon_r10+
+NAME = JavaShin-X Holy Blue-Virtual-Dragon KERNEL. jsX-CustoKernal.
 
 
 KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
