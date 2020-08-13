@@ -186,5 +186,3 @@ obj-y += mmi_annotate/
 obj-y += mmi_info/
 obj-y += tzlog_dump/
 obj-y += watchdogtest/
-
-obj-$(CONFIG_AINUR_DTS_SW) += dts_eagle/

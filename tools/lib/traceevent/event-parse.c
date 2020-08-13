@@ -2857,6 +2857,7 @@ process_str(struct event_format *event __maybe_unused, struct print_arg *arg,
 	if (read_expected(EVENT_DELIM, ")") < 0)
 		goto out_err;
 
+	free_token(token);
 	type = read_token(&token);
 	*tok = token;
 

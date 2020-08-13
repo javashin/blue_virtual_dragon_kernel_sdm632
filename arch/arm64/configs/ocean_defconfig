@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.232-Blue-Virtual-Dragon_r8+ Kernel Configuration
+# Linux/arm64 4.9.232-BvD-AOSPA_r12+ Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -535,7 +535,7 @@ CONFIG_RANDOMIZE_MODULE_REGION_FULL=y
 #
 # Boot options
 #
-CONFIG_CMDLINE="buildvariant=user audit=0 mitigations=off zram.num_devices=4 zram_num.devices=4 zswap.compressor=lz4 zswap.max_pool_percent=15 zswap.zpool=z3fold zswap.enabled=1 elevator=anxiety coresight_cpu_debug.enable=0 debug=0 nowatchdog nmi_watchdog=0 no_debug_objects dyndbg=0 module.dyndbg=0"
+CONFIG_CMDLINE="audit=0 mitigations=off zram.num_devices=4 zram_num.devices=4 zswap.compressor=lz4 zswap.max_pool_percent=20 zswap.zpool=z3fold zswap.enabled=1 elevator=anxiety coresight_cpu_debug.enable=0 debug=0 nowatchdog nmi_watchdog=0 no_debug_objects dyndbg=0 module.dyndbg=0"
 # CONFIG_CMDLINE_FROM_BOOTLOADER is not set
 CONFIG_CMDLINE_EXTEND=y
 # CONFIG_CMDLINE_FORCE is not set
@@ -563,7 +563,7 @@ CONFIG_BINFMT_SCRIPT=y
 # CONFIG_COREDUMP is not set
 CONFIG_COMPAT=y
 CONFIG_KUSER_HELPERS=y
-CONFIG_COMPAT_VDSO=y
+# CONFIG_COMPAT_VDSO is not set
 
 #
 # Power management options
@@ -571,8 +571,7 @@ CONFIG_COMPAT_VDSO=y
 CONFIG_SUSPEND=y
 CONFIG_SUSPEND_FREEZER=y
 CONFIG_SUSPEND_SKIP_SYNC=y
-CONFIG_POWERSUSPEND=y
-# CONFIG_POWERSUSPEND_DEBUG is not set
+# CONFIG_POWERSUSPEND is not set
 # CONFIG_HIBERNATION is not set
 CONFIG_PM_SLEEP=y
 CONFIG_PM_SLEEP_SMP=y
@@ -587,7 +586,7 @@ CONFIG_PM_CLK=y
 CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
 CONFIG_CPU_PM=y
 # CONFIG_DEDUCE_WAKEUP_REASONS is not set
-CONFIG_BOEFFLA_WL_BLOCKER=y
+# CONFIG_BOEFFLA_WL_BLOCKER is not set
 # CONFIG_SUSPEND_DEBUG is not set
 CONFIG_ARCH_HIBERNATION_POSSIBLE=y
 CONFIG_ARCH_SUSPEND_POSSIBLE=y
@@ -1332,7 +1331,6 @@ CONFIG_BLK_DEV_RAM_SIZE=8192
 # CONFIG_SENSORS_LIS3LV02D is not set
 # CONFIG_AD525X_DPOT is not set
 # CONFIG_DUMMY_IRQ is not set
-CONFIG_INPUT_DRV2624_HAPTICS=y
 # CONFIG_ICS932S401 is not set
 # CONFIG_ENCLOSURE_SERVICES is not set
 # CONFIG_QCOM_COINCELL is not set
@@ -1352,6 +1350,7 @@ CONFIG_MOT_UTAG=y
 CONFIG_HDCP_QSEECOM=y
 CONFIG_QSEECOM=y
 # CONFIG_QPNP_MISC is not set
+# CONFIG_HAPTIC_DRV2625 is not set
 CONFIG_DROPBOX=y
 # CONFIG_SARSENSOR_SX9331 is not set
 CONFIG_SARSENSOR_SX9325=y
@@ -1931,6 +1930,7 @@ CONFIG_INPUT_UINPUT=y
 # CONFIG_INPUT_CMA3000 is not set
 # CONFIG_INPUT_SOC_BUTTON_ARRAY is not set
 # CONFIG_INPUT_DRV260X_HAPTICS is not set
+CONFIG_INPUT_DRV2624_HAPTICS=y
 # CONFIG_INPUT_DRV2665_HAPTICS is not set
 # CONFIG_INPUT_DRV2667_HAPTICS is not set
 CONFIG_SENSORS_FPC_1020=y
@@ -4097,10 +4097,7 @@ CONFIG_DEVFREQ_SIMPLE_DEV=y
 CONFIG_QCOM_DEVFREQ_DEVBW=y
 CONFIG_SPDM_SCM=y
 CONFIG_DEVFREQ_SPDM=y
-CONFIG_DEVFREQ_BOOST=y
-CONFIG_DEVFREQ_INPUT_BOOST_DURATION_MS=100
-CONFIG_DEVFREQ_WAKE_BOOST_DURATION_MS=1000
-CONFIG_DEVFREQ_MSM_CPUBW_BOOST_FREQ=0
+# CONFIG_DEVFREQ_BOOST is not set
 # CONFIG_PM_DEVFREQ_EVENT is not set
 CONFIG_EXTCON=y
 
@@ -4471,7 +4468,6 @@ CONFIG_NVMEM_SPMI_SDAM=y
 CONFIG_SENSORS=y
 CONFIG_SENSORS_SSC=y
 # CONFIG_TEE is not set
-CONFIG_AINUR_DTS_SW=y
 
 #
 # Firmware Drivers
