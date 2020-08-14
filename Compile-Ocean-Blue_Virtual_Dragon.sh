@@ -87,12 +87,12 @@ echo "1" > /sys/devices/system/cpu/intel_pstate/no_turbo
 rm ANYKERNEL/Image.gz-dtb
 cp /OUT/arch/arm64/boot/Image.gz-dtb ANYKERNEL/
 cd ANYKERNEL/
-rm 4.9.232-KERNEL-BvD-AOSPA_r12+12-AUG-2020-NONDEBUG-OCEAN.zip
-zip -r9 4.9.232-KERNEL-BvD-AOSPA_r12+12-AUG-2020-NONDEBUG-OCEAN.zip * -x .git README.md *placeholder
-cp 4.9.232-KERNEL-BvD-AOSPA_r12+12-AUG-2020-NONDEBUG-OCEAN.zip /home/
+rm 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip
+zip -r9 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip * -x .git README.md *placeholder
+cp 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip /home/
 ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
 ls -lash ./Image.gz-dtb
-ls -lash ./4.9.232-KERNEL-BvD-AOSPA_r12+12-AUG-2020-NONDEBUG-OCEAN.zip
+ls -lash ./4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip
 
 echo "YAY"
 echo "KERNAL KERNAL KERNAL KERNAL KARNAL KARMA KARMA KARMA"

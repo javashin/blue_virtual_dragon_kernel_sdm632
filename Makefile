@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 232
-EXTRAVERSION = -BvD-AOSPA_r12+
+EXTRAVERSION = -BvD-jsX-Ocean-Perf_r14+
 NAME = JavaShin-X Holy Blue-Virtual-Dragon KERNEL. jsX-CustoKernal.
 
 
