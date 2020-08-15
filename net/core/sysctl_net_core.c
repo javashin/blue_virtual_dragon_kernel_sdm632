@@ -268,7 +268,6 @@ proc_dointvec_minmax_bpf_restricted(struct ctl_table *table, int write,
 }
 # endif /* CONFIG_HAVE_EBPF_JIT */
 
-# ifdef CONFIG_HAVE_EBPF_JIT
 static int
 proc_dolongvec_minmax_bpf_restricted(struct ctl_table *table, int write,
 				     void __user *buffer, size_t *lenp,
@@ -526,7 +525,6 @@ err_reg:
 err_dup:
 	return -ENOMEM;
 }
-# endif /* CONFIG_HAVE_EBPF_JIT */
 
 static __net_exit void sysctl_core_net_exit(struct net *net)
 {
