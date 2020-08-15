@@ -46,6 +46,7 @@
 
 &mhi_device {
 	status = "okay";
+	qcom,pcie-perst-enum;
 };
 
 &restart_pshold {
@@ -54,6 +55,7 @@
 
 &ipc_router_mhi_dev_xprt {
 	status = "okay";
+	qcom,pcie-perst-enum;
 };
 
 &mhi_net_device {

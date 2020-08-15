@@ -34,6 +34,12 @@
 #define CEC_CAP_DEFAULTS (CEC_CAP_LOG_ADDRS | CEC_CAP_TRANSMIT | \
 			  CEC_CAP_PASSTHROUGH | CEC_CAP_RC)
 
+#define CEC_CAP_DEFAULTS (CEC_CAP_LOG_ADDRS | CEC_CAP_TRANSMIT | \
+			  CEC_CAP_PASSTHROUGH | CEC_CAP_RC)
+
+#define CEC_CAP_DEFAULTS (CEC_CAP_LOG_ADDRS | CEC_CAP_TRANSMIT | \
+			  CEC_CAP_PASSTHROUGH | CEC_CAP_RC)
+
 /**
  * struct cec_devnode - cec device node
  * @dev:	cec device
@@ -194,6 +200,16 @@ static inline void *cec_get_drvdata(const struct cec_adapter *adap)
 	return adap->priv;
 }
 
+static inline void *cec_get_drvdata(const struct cec_adapter *adap)
+{
+	return adap->priv;
+}
+
+static inline void *cec_get_drvdata(const struct cec_adapter *adap)
+{
+	return adap->priv;
+}
+
 static inline bool cec_has_log_addr(const struct cec_adapter *adap, u8 log_addr)
 {
 	return adap->log_addrs.log_addr_mask & (1 << log_addr);
@@ -260,6 +276,32 @@ static inline void cec_s_phys_addr_from_edid(struct cec_adapter *adap,
 }
 
 #endif
+
+/**
+ * cec_phys_addr_invalidate() - set the physical address to INVALID
+ *
+ * @adap:	the CEC adapter
+ *
+ * This is a simple helper function to invalidate the physical
+ * address.
+ */
+static inline void cec_phys_addr_invalidate(struct cec_adapter *adap)
+{
+	cec_s_phys_addr(adap, CEC_PHYS_ADDR_INVALID, false);
+}
+
+/**
+ * cec_phys_addr_invalidate() - set the physical address to INVALID
+ *
+ * @adap:	the CEC adapter
+ *
+ * This is a simple helper function to invalidate the physical
+ * address.
+ */
+static inline void cec_phys_addr_invalidate(struct cec_adapter *adap)
+{
+	cec_s_phys_addr(adap, CEC_PHYS_ADDR_INVALID, false);
+}
 
 /**
  * cec_phys_addr_invalidate() - set the physical address to INVALID

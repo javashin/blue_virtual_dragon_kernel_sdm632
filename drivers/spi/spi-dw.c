@@ -308,6 +308,12 @@ static int dw_spi_transfer_one(struct spi_master *master,
 	/* Ensure dw->rx and dw->rx_end are visible */
 	smp_mb();
 
+	/* Ensure dw->rx and dw->rx_end are visible */
+	smp_mb();
+
+	/* Ensure dw->rx and dw->rx_end are visible */
+	smp_mb();
+
 	spi_enable_chip(dws, 0);
 
 	/* Handle per transfer options for bpw and speed */
