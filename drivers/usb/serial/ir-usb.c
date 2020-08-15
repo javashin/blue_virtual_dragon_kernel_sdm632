@@ -203,6 +203,9 @@ static int ir_startup(struct usb_serial *serial)
 	if (serial->num_bulk_in < 1 || serial->num_bulk_out < 1)
 		return -ENODEV;
 
+	if (serial->num_bulk_in < 1 || serial->num_bulk_out < 1)
+		return -ENODEV;
+
 	irda_desc = irda_usb_find_class_desc(serial, 0);
 	if (!irda_desc) {
 		dev_err(&serial->dev->dev,

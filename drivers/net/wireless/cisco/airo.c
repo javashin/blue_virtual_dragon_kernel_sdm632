@@ -7916,7 +7916,7 @@ static int writerids(struct net_device *dev, aironet_ioctl *comp) {
 	if(comp->len > RIDSIZE)
 		return -EINVAL;
 
-	if ((iobuf = kmalloc(RIDSIZE, GFP_KERNEL)) == NULL)
+	if ((iobuf = kzalloc(RIDSIZE, GFP_KERNEL)) == NULL)
 		return -ENOMEM;
 
 	if (copy_from_user(iobuf,comp->data,comp->len)) {

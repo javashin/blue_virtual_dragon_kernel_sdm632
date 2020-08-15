@@ -2103,7 +2103,7 @@ static int _enable_preprogram(struct omap_hwmod *oh)
  */
 static int _enable(struct omap_hwmod *oh)
 {
-	int r;
+	int r = 0;
 
 	pr_debug("omap_hwmod: %s: enabling\n", oh->name);
 

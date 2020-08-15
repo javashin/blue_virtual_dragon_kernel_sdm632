@@ -1414,7 +1414,7 @@ parse_tag_3_packet(struct ecryptfs_crypt_stat *crypt_stat,
 	if (max_packet_size < (ECRYPTFS_SALT_SIZE + 7)) {
 		printk(KERN_ERR "Max packet size too large\n");
 		rc = -EINVAL;
-		goto out;
+		goto out_free;
 	}
 	if (data[(*packet_size)++] != ECRYPTFS_TAG_3_PACKET_TYPE) {
 		printk(KERN_ERR "First byte != 0x%.2x; invalid packet\n",

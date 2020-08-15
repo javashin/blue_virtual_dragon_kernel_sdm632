@@ -477,7 +477,7 @@ static inline int regulator_set_mode(struct regulator *regulator,
 
 static inline unsigned int regulator_get_mode(struct regulator *regulator)
 {
-	return REGULATOR_MODE_NORMAL;
+	return 0;
 }
 
 static inline int regulator_set_load(struct regulator *regulator, int load_uA)

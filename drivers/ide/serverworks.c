@@ -117,6 +117,9 @@ static void svwks_set_pio_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 	if (drive->dn >= ARRAY_SIZE(drive_pci))
 		return;
 
+	if (drive->dn >= ARRAY_SIZE(drive_pci))
+		return;
+
 	pci_write_config_byte(dev, drive_pci[drive->dn], pio_modes[pio]);
 
 	if (svwks_csb_check(dev)) {
@@ -142,6 +145,9 @@ static void svwks_set_dma_mode(ide_hwif_t *hwif, ide_drive_t *drive)
 	u8 unit			= drive->dn & 1;
 
 	u8 ultra_enable	 = 0, ultra_timing = 0, dma_timing = 0;
+
+	if (drive->dn >= ARRAY_SIZE(drive_pci2))
+		return;
 
 	if (drive->dn >= ARRAY_SIZE(drive_pci2))
 		return;

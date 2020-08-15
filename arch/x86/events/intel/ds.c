@@ -1328,6 +1328,8 @@ intel_pmu_save_and_restart_reload(struct perf_event *event, int count)
 
 	local64_set(&hwc->period_left, -new);
 
+	local64_set(&hwc->period_left, -new);
+
 	perf_event_update_userpage(event);
 
 	return 0;

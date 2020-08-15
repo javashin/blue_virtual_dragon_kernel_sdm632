@@ -88,6 +88,8 @@ static bool __init cntvct_functional(void)
 	if (!np)
 		np = of_find_compatible_node(NULL, NULL, "arm,armv8-timer");
 	if (!np)
+		np = of_find_compatible_node(NULL, NULL, "arm,armv8-timer");
+	if (!np)
 		goto out_put;
 
 	if (of_property_read_bool(np, "arm,cpu-registers-not-fw-configured"))

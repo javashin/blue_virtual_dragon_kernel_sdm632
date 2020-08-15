@@ -2115,6 +2115,8 @@ skip_ats_check:
 
 	domain_flush_complete(domain);
 
+	domain_flush_complete(domain);
+
 	return ret;
 }
 

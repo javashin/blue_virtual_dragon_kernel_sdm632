@@ -704,7 +704,8 @@ static void prb_retire_rx_blk_timer_expired(unsigned long data)
 			/* Waiting for skb_copy_bits to finish... */
 			cpu_relax();
 		}
-	}
+	} else
+		return DEFAULT_PRB_RETIRE_TOV;
 
 	if (pkc->last_kactive_blk_num == pkc->kactive_blk_num) {
 		if (!frozen) {
