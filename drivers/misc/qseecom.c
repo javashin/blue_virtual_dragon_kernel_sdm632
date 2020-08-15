@@ -4950,7 +4950,8 @@ exit_ion_free:
 	mutex_unlock(&app_access_lock);
 	if (!IS_ERR_OR_NULL(data->client.ihandle)) {
 		ion_free(qseecom.ion_clnt, data->client.ihandle);
-		data->client.ihandle = NULL;
+		memset((void *)&data->client,
+			0, sizeof(struct qseecom_client_handle));
 	}
 exit_data_free:
 	kfree(data);

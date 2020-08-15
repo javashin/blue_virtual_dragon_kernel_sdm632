@@ -493,3 +493,7 @@
 &pm660_charger {
 	qcom,ufp-only-mode;
 };
+
+&pm660_charger {
+	qcom,ufp-only-mode;
+};
