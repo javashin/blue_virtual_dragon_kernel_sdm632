@@ -1827,6 +1827,9 @@ static void ath9k_bss_info_changed(struct ieee80211_hw *hw,
 		ath9k_set_txpower(sc, vif);
 	}
 
+	if (changed & IEEE80211_CONF_CHANGE_POWER)
+		ath9k_set_txpower(sc, NULL);
+
 	mutex_unlock(&sc->mutex);
 	ath9k_ps_restore(sc);
 

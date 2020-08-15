@@ -239,6 +239,8 @@ static void net_prio_attach(struct cgroup_taskset *tset)
 
 	cgroup_sk_alloc_disable();
 
+	cgroup_sk_alloc_disable();
+
 	cgroup_taskset_for_each(p, css, tset) {
 		void *v = (void *)(unsigned long)css->cgroup->id;
 

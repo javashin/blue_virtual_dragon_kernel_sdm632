@@ -74,6 +74,11 @@ static int parse_features(struct dm_arg_set *as, struct flakey_c *fc,
 			return -EINVAL;
 		}
 
+		if (!arg_name) {
+			ti->error = "Insufficient feature arguments";
+			return -EINVAL;
+		}
+
 		/*
 		 * drop_writes
 		 */

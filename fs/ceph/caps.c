@@ -3316,6 +3316,7 @@ static void handle_cap_export(struct inode *inode, struct ceph_mds_caps *ex,
 	} else {
 		t_cap_id = t_seq = t_mseq = 0;
 		target = -1;
+		mutex_lock(&session->s_mutex);
 	}
 
 	dout("handle_cap_export inode %p ci %p mds%d mseq %d target %d\n",
