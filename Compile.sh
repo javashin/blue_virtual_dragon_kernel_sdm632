@@ -32,9 +32,9 @@ sleep 1
 
 PATH="/COMPILING/clang-master/bin:${PATH}" make O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 CONFIG_NO_ERROR_ON_MISMATCH=y SELINUX_DEFCONFIG=selinux_defconfig ocean_defconfig
 
-PATH="/COMPILING/clang-master/bin:${PATH}" make O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 CONFIG_NO_ERROR_ON_MISMATCH=y SELINUX_DEFCONFIG=selinux_defconfig oldconfig
+#PATH="/COMPILING/clang-master/bin:${PATH}" make O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 CONFIG_NO_ERROR_ON_MISMATCH=y SELINUX_DEFCONFIG=selinux_defconfig oldconfig
 
-PATH="/COMPILING/clang-master/bin:${PATH}" make O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 CONFIG_NO_ERROR_ON_MISMATCH=y SELINUX_DEFCONFIG=selinux_defconfig nconfig
+#PATH="/COMPILING/clang-master/bin:${PATH}" make O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 CONFIG_NO_ERROR_ON_MISMATCH=y SELINUX_DEFCONFIG=selinux_defconfig nconfig
 
 
 
@@ -85,13 +85,17 @@ echo "Set Normal Speed To Cooldown CPU After Compilation"
 echo "1" > /sys/devices/system/cpu/intel_pstate/no_turbo
 
 #rm ANYKERNEL/Image.gz-dtb
-#cp /OUT/arch/arm64/boot/Image.gz-dtb ANYKERNEL/
+
+cp /OUT/arch/arm64/boot/Image.gz-dtb .
+
 #cd ANYKERNEL/
 #rm 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip
 #zip -r9 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip * -x .git README.md *placeholder
 #cp 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip /home/
-#ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
-#ls -lash ./Image.gz-dtb
+
+ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
+ls -lash ./Image.gz-dtb
+
 #ls -lash ./4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip
 
 echo "YAY"
