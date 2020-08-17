@@ -1451,7 +1451,8 @@ static inline void ezusb_delete(struct ezusb_priv *upriv)
 	unsigned long flags;
 
 	BUG_ON(in_interrupt());
-	BUG_ON(!upriv);
+	if (!upriv)
+		return -EINVAL;
 
 	dev = upriv->dev;
 	mutex_lock(&upriv->mtx);

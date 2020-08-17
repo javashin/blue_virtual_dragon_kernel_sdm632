@@ -553,6 +553,8 @@ typedef u64 acpi_integer;
 
 #define ACPI_ACCESS_BYTE_WIDTH(size)    (1 << ((size) - 1))
 
+#define ACPI_ACCESS_BYTE_WIDTH(size)    (1 << ((size) - 1))
+
 /*******************************************************************************
  *
  * Miscellaneous constants

@@ -37,6 +37,14 @@ ifeq ($(cc-name),clang)
 KBUILD_CFLAGS += -Wno-vectorizer-no-neon
 endif
 
+ifeq ($(cc-name),clang)
+KBUILD_CFLAGS += -Wno-vectorizer-no-neon
+endif
+
+ifeq ($(cc-name),clang)
+KBUILD_CFLAGS += -Wno-vectorizer-no-neon
+endif
+
 # This should work on most of the modern platforms
 KBUILD_DEFCONFIG := multi_v7_defconfig
 ifeq ($(COMPILER),clang)
@@ -328,8 +336,11 @@ all:	$(KBUILD_IMAGE) $(KBUILD_DTBS)
 
 boot := arch/arm/boot
 
+archheaders:
+	$(Q)$(MAKE) $(build)=arch/arm/tools uapi
+
 archprepare:
-	$(Q)$(MAKE) $(build)=arch/arm/tools include/generated/mach-types.h
+	$(Q)$(MAKE) $(build)=arch/arm/tools kapi
 
 # Convert bzImage to zImage
 bzImage: zImage

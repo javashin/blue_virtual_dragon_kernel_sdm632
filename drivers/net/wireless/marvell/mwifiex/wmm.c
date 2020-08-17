@@ -984,6 +984,10 @@ int mwifiex_ret_wmm_get_status(struct mwifiex_private *priv,
 				sizeof(struct ieee_types_wmm_parameter))
 				break;
 
+			if (wmm_param_ie->vend_hdr.len + 2 >
+				sizeof(struct ieee_types_wmm_parameter))
+				break;
+
 			memcpy((u8 *) &priv->curr_bss_params.bss_descriptor.
 			       wmm_ie, wmm_param_ie,
 			       wmm_param_ie->vend_hdr.len + 2);

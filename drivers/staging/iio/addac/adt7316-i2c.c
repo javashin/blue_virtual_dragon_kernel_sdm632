@@ -68,6 +68,8 @@ static int adt7316_i2c_multi_read(void *client, u8 reg, u8 count, u8 *data)
 		}
 	}
 
+	*data = ret;
+
 	return 0;
 }
 

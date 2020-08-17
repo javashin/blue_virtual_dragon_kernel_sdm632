@@ -233,6 +233,11 @@ ENTRY(efi32_stub_entry)
 	btrl	$X86_CR0_PG_BIT, %eax
 	movl	%eax, %cr0
 
+	/* Disable paging */
+	movl	%cr0, %eax
+	btrl	$X86_CR0_PG_BIT, %eax
+	movl	%eax, %cr0
+
 	jmp	startup_32
 ENDPROC(efi32_stub_entry)
 #endif

@@ -794,6 +794,9 @@ static int spidev_probe(struct spi_device *spi)
 		set_bit(minor, minors);
 		list_add(&spidev->device_entry, &device_list);
 	}
+#ifdef CONFIG_SPI_SLAVE
+	spi_slave_abort(spidev->spi);
+#endif
 	mutex_unlock(&device_list_lock);
 
 	spidev->speed_hz = spi->max_speed_hz;

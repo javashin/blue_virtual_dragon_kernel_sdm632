@@ -207,6 +207,9 @@ static void uas_log_cmd_state(struct scsi_cmnd *cmnd, const char *prefix,
 	if (status == -ENODEV) /* too late */
 		return;
 
+	if (status == -ENODEV) /* too late */
+		return;
+
 	scmd_printk(KERN_INFO, cmnd,
 		    "%s %d uas-tag %d inflight:%s%s%s%s%s%s%s%s%s%s%s%s ",
 		    prefix, status, cmdinfo->uas_tag,
@@ -863,6 +866,16 @@ static int uas_slave_configure(struct scsi_device *sdev)
 	/* Some disks cannot handle READ_CAPACITY_16 */
 	if (devinfo->flags & US_FL_NO_READ_CAPACITY_16)
 		sdev->no_read_capacity_16 = 1;
+
+	/* Some disks cannot handle READ_CAPACITY_16 */
+	if (devinfo->flags & US_FL_NO_READ_CAPACITY_16)
+		sdev->no_read_capacity_16 = 1;
+
+	/*
+	 * in some cases we have to guess
+	 */
+	if (devinfo->flags & US_FL_CAPACITY_HEURISTICS)
+		sdev->guess_capacity = 1;
 
 	/*
 	 * Some disks return the total number of blocks in response

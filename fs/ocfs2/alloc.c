@@ -7250,6 +7250,10 @@ int ocfs2_truncate_inline(struct inode *inode, struct buffer_head *di_bh,
 	if (start >= i_size_read(inode))
 		return 0;
 
+	/* No need to punch hole beyond i_size. */
+	if (start >= i_size_read(inode))
+		return 0;
+
 	if (end > i_size_read(inode))
 		end = i_size_read(inode);
 

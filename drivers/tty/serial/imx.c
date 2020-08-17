@@ -1654,7 +1654,7 @@ static int imx_poll_init(struct uart_port *port)
 		return retval;
 	retval = clk_prepare_enable(sport->clk_per);
 	if (retval)
-		clk_disable_unprepare(sport->clk_ipg);
+		clk_unprepare(sport->clk_ipg);
 
 	imx_setup_ufcr(sport, TXTL_DEFAULT, RXTL_DEFAULT);
 

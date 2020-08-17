@@ -2304,6 +2304,8 @@ err_add_udc:
  err_irq:
 	free_irq(dev->irq, dev);
  err:
+	kfree(dev);
+
 	return ret;
 }
 

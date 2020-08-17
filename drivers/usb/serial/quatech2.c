@@ -834,7 +834,10 @@ static void qt2_break_ctl(struct tty_struct *tty, int break_state)
 	int status;
 	u16 val;
 
+	/* May be called from qt2_process_read_urb() for an unbound port. */
 	port_priv = usb_get_serial_port_data(port);
+	if (!port_priv)
+		return;
 
 	val = (break_state == -1) ? 1 : 0;
 
@@ -941,7 +944,10 @@ static int qt2_write_room(struct tty_struct *tty)
 	unsigned long flags = 0;
 	int r;
 
+	/* May be called from qt2_process_read_urb() for an unbound port. */
 	port_priv = usb_get_serial_port_data(port);
+	if (!port_priv)
+		return;
 
 	spin_lock_irqsave(&port_priv->urb_lock, flags);
 

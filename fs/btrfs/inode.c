@@ -9633,6 +9633,9 @@ static int btrfs_rename_exchange(struct inode *old_dir,
 	if (dest != root)
 		btrfs_record_root_in_trans(trans, dest);
 
+	if (dest != root)
+		btrfs_record_root_in_trans(trans, dest);
+
 	/*
 	 * We need to find a free sequence number both in the source and
 	 * in the destination directory for the exchange.

@@ -804,7 +804,7 @@ int prism2mgmt_ramdl_state(struct wlandevice *wlandev, void *msgp)
 		msg->resultcode.data = P80211ENUM_resultcode_success;
 	}
 
-	return 0;
+	return result;
 }
 
 /*----------------------------------------------------------------

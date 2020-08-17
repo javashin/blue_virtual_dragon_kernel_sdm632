@@ -2635,6 +2635,9 @@ int hns_dsaf_get_sset_count(struct dsaf_device *dsaf_dev, int stringset)
 		else
 			return DSAF_V2_STATIC_NUM;
 	}
+
+	put_device(&pdev->dev);
+
 	return 0;
 }
 

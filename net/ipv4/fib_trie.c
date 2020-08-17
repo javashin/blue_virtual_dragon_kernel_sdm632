@@ -2303,6 +2303,7 @@ static struct key_vector *fib_trie_get_idx(struct seq_file *seq, loff_t pos)
 	loff_t idx = 0;
 	unsigned int h;
 
+	rcu_read_lock();
 	for (h = 0; h < FIB_TABLE_HASHSZ; h++) {
 		struct hlist_head *head = &net->ipv4.fib_table_hash[h];
 		struct fib_table *tb;
@@ -2318,7 +2319,9 @@ static struct key_vector *fib_trie_get_idx(struct seq_file *seq, loff_t pos)
 					return n;
 				}
 		}
+		cond_resched_rcu();
 	}
+	rcu_read_unlock();
 
 	return NULL;
 }

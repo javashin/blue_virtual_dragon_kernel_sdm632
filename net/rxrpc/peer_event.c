@@ -151,6 +151,9 @@ void rxrpc_error_report(struct sock *sk)
 	if (unlikely(!local))
 		return;
 
+	if (unlikely(!local))
+		return;
+
 	_enter("%p{%d}", sk, local->debug_id);
 
 	skb = sock_dequeue_err_skb(sk);

@@ -3901,6 +3901,14 @@ retry:
 		 */
 		scanned = 1;
 		index = 0;
+
+		/*
+		 * If we're looping we could run into a page that is locked by a
+		 * writer and that writer could be waiting on writeback for a
+		 * page in our current bio, and thus deadlock, so flush the
+		 * write bio here.
+		 */
+		flush_write_bio(data);
 		goto retry;
 	}
 	flush_write_bio(&epd);
@@ -4329,6 +4337,8 @@ int try_release_extent_mapping(struct extent_map_tree *map,
 
 			/* once for us */
 			free_extent_map(em);
+
+			cond_resched(); /* Allow large-extent preemption. */
 		}
 	}
 	return try_release_extent_state(map, tree, page, mask);

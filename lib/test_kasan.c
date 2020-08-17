@@ -145,6 +145,7 @@ static noinline void __init kmalloc_oob_krealloc_less(void)
 	if (!ptr1 || !ptr2) {
 		pr_err("Allocation failed\n");
 		kfree(ptr1);
+		kfree(ptr2);
 		return;
 	}
 	ptr2[size2] = 'x';

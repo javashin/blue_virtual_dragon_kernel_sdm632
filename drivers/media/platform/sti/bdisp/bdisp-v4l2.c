@@ -578,8 +578,7 @@ static int bdisp_open(struct file *file)
 	struct bdisp_ctx *ctx = NULL;
 	int ret;
 
-	if (mutex_lock_interruptible(&bdisp->lock))
-		return -ERESTARTSYS;
+	mutex_lock(&bdisp->lock);
 
 	/* Allocate memory for both context and node */
 	ctx = kzalloc(sizeof(*ctx), GFP_KERNEL);

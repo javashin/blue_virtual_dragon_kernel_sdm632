@@ -448,6 +448,9 @@ static int __qseecom_scm_call2_locked(uint32_t smc_id, struct scm_desc *desc)
 	if (qseecom.support_bus_scaling)
 		return scm_call2(smc_id, desc);
 
+	if (qseecom.support_bus_scaling)
+		return scm_call2(smc_id, desc);
+
 	do {
 		ret = scm_call2_noretry(smc_id, desc);
 		if (ret == -EBUSY) {
@@ -4950,7 +4953,8 @@ exit_ion_free:
 	mutex_unlock(&app_access_lock);
 	if (!IS_ERR_OR_NULL(data->client.ihandle)) {
 		ion_free(qseecom.ion_clnt, data->client.ihandle);
-		data->client.ihandle = NULL;
+		memset((void *)&data->client,
+			0, sizeof(struct qseecom_client_handle));
 	}
 exit_data_free:
 	kfree(data);

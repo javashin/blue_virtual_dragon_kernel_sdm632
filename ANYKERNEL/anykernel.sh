@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-#- JavaShin-X KERNEL-BvD-Ocean-NONDEBUG-OCEAN Caf MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
+kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon Rebirth Fenix Caf MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
 do.devicecheck=1
 do.modules=0
 do.systemless=1
@@ -65,17 +65,14 @@ ui_print " "
 ui_print "Device: Moto G7 Power (OCEAN)"
 ui_print "Kernel Name: Custo-Kernal-JavaShin-X"
 ui_print "Build User: root = javashin"
-ui_print "KVer: 4.9.232-BvD-jsX-Ocean-Perf_r14+ Blue-Virtual-Dragon SMP PREEMPT aarch64"
-ui_print "Thu 13 August 2020"
+ui_print "KVer: 4.9.232-BvD-Fenix_r15+ jsX-CustoKernal SMP PREEMPT aarch64"
+ui_print "Monday 17 August 2020"
 ui_print "Toolchain Info:"
 ui_print "Proton clang version 12.0.0 LTO+PGO+POLLY Optimized Build by kdragOn"
 ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-5)"
-ui_print "Cross Linker Gnu Binutils 2.35 (Debian 2.35)"
+ui_print "Cross Linker Gnu Binutils 2.35 (Debian 2.35-5)"
 ui_print "CFLAGS/KBUILD_FLAGS=-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
-
 ui_print " "
-
-
 
 
 write_boot;

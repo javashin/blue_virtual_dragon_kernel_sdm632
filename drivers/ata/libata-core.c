@@ -6473,6 +6473,9 @@ int ata_host_activate(struct ata_host *host, int irq,
 	if (rc)
 		return rc;
 
+	/* Ensure ata_port probe has completed */
+	async_synchronize_full();
+
 	for (i = 0; i < host->n_ports; i++)
 		ata_port_desc(host->ports[i], "irq %d", irq);
 

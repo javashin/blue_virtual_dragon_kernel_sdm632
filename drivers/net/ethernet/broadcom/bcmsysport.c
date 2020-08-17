@@ -1987,6 +1987,9 @@ static int bcm_sysport_resume(struct device *d)
 	/* Disable the UniMAC RX/TX */
 	umac_enable_set(priv, CMD_RX_EN | CMD_TX_EN, 0);
 
+	/* Disable the UniMAC RX/TX */
+	umac_enable_set(priv, CMD_RX_EN | CMD_TX_EN, 0);
+
 	/* We may have been suspended and never received a WOL event that
 	 * would turn off MPD detection, take care of that now
 	 */

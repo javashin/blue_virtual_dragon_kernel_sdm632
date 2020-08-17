@@ -68,7 +68,7 @@ static void free_fdtable_rcu(struct rcu_head *rcu)
 static void copy_fd_bitmaps(struct fdtable *nfdt, struct fdtable *ofdt,
 			    unsigned int count)
 {
-	unsigned int cpy, set;
+	size_t cpy, set;
 
 	cpy = count / BITS_PER_BYTE;
 	set = (nfdt->max_fds - count) / BITS_PER_BYTE;
