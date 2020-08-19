@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
-SUBLEVEL = 233
-EXTRAVERSION = -Pre-BvD
+SUBLEVEL = 232
+EXTRAVERSION = -BvD_r1
 NAME = Roaring Lionus
 
 ifdef CONFIG_POLLY_CLANG
@@ -405,7 +405,7 @@ KBUILD_CFLAGS   := -O3 -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common -fshort-wchar \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -std=gnu89 -fno-stack-protector -pipe
+		   -std=gnu89 -fno-stack-protector -Wno-error=misleading-indentation -pipe
 KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
