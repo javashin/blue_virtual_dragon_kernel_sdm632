@@ -1,8 +1,8 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 233
-EXTRAVERSION = -BvD-Fenix_r15+
-NAME = JavaShin-X Blue-Virtual-Dragon Revival Rebirth Fenix-KERNEL. jsX-CustoKernal.
+EXTRAVERSION = -BvD-BaHaMuT_r16+
+NAME = JavaShin-X Blue-Virtual-Dragon Bahamut-KERNEL. jsX-CustoKernal.
 
 
 KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
