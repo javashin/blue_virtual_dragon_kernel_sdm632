@@ -1,8 +1,19 @@
 VERSION = 4
 PATCHLEVEL = 9
-SUBLEVEL = 232
-EXTRAVERSION = -jsX
+SUBLEVEL = 233
+EXTRAVERSION = -BvD-Bliss-Rom_r1
 NAME = Roaring Lionus
+
+ifdef CONFIG_POLLY_CLANG
+KBUILD_CFLAGS	+= -mllvm -polly \
+		   -mllvm -polly-run-dce \
+		   -mllvm -polly-run-inliner \
+		   -mllvm -polly-opt-fusion=max \
+		   -mllvm -polly-ast-use-context \
+		   -mllvm -polly-detect-keep-going \
+		   -mllvm -polly-vectorizer=stripmine \
+		   -mllvm -polly-invariant-load-hoisting
+endif
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"

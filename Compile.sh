@@ -54,14 +54,14 @@ sleep 1
 
 # -Wno-fortify-source -O3 -fno-stack-protector"
 
-#export KCFLAGS+="-march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
+export KCFLAGS+="-march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
 #-mcpu=kyro -mcpu=cortex-a73.cortex-a53 -march=armv8-a+fp+simd+crc+crypto -march=armv8-a+fp+simd+crc+crypto"
-#export KBUILD_CFLAGS+="-march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
+export KBUILD_CFLAGS+="-march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
 #-mcpu=kyro -mcpu=cortex-a72.cortex-a53 -march=armv8-a+fp+simd+crc+crypto -march=armv8-a+fp+simd+crc+crypto"
 #-Wno-error=misleading-indentation
 #-Wno-error=incompatible-pointer-types-discards-qualifiers
 
-PATH="/COMPILING/clang-master/bin:${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y KCFLAGS+="-O3 -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -Wno-error=misleading-indentation -Wno-enum-conversion" CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_NO_ERROR_ON_MISMATCH=y CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 SELINUX_DEFCONFIG=selinux_defconfig CONFIG_RD_ZSTD=y CONFIG_CRYPTO_STREEBOG=y CONFIG_CRYPTO_ZSTD=y CONFIG_XXHASH=y CONFIG_DECOMPRESS_ZSTD=y CONFIG_ZSTD_COMPRESS=y CONFIG_ZSTD_DECOMPRESS=y FB_MSM_MDSS_KCAL_CTRL=y
+PATH="/COMPILING/clang-master/bin:${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y KCFLAGS+="-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo -Wno-error=misleading-indentation -Wno-enum-conversion" CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_NO_ERROR_ON_MISMATCH=y CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 SELINUX_DEFCONFIG=selinux_defconfig CONFIG_RD_ZSTD=y CONFIG_CRYPTO_STREEBOG=y CONFIG_CRYPTO_ZSTD=y CONFIG_XXHASH=y CONFIG_DECOMPRESS_ZSTD=y CONFIG_ZSTD_COMPRESS=y CONFIG_ZSTD_DECOMPRESS=y FB_MSM_MDSS_KCAL_CTRL=y
 
 #PATH="/COMPILING/clang-master/bin:${PATH}" make -j$(nproc --all) O=/OUT ARCH=arm64 SUBARCH=arm CC=clang LD=/usr/bin/aarch64-linux-gnu-ld.bfd DTC_EXT=dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y KCFLAGS+="-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo -Wno-error=misleading-indentation -Wno-enum-conversion" CROSS_COMPILE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE_ARM32=/usr/bin/arm-linux-gnueabihf- CLANG_TRIPLE=/usr/bin/aarch64-linux-gnu- CROSS_COMPILE=/usr/bin/aarch64-linux-gnu- CONFIG_NO_ERROR_ON_MISMATCH=y CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_FOCALTECH_0FLASH_MMI_IC_NAME=ft8719 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83102 CONFIG_INPUT_HIMAX_V2_MMI_IC_NAME=hx83112 SELINUX_DEFCONFIG=selinux_defconfig CONFIG_RD_ZSTD=y CONFIG_CRYPTO_STREEBOG=y CONFIG_CRYPTO_ZSTD=y CONFIG_XXHASH=y CONFIG_DECOMPRESS_ZSTD=y  CONFIG_ZSTD_COMPRESS=y CONFIG_ZSTD_DECOMPRESS=y FB_MSM_MDSS_KCAL_CTRL=y modules 
 
@@ -85,13 +85,17 @@ echo "Set Normal Speed To Cooldown CPU After Compilation"
 echo "1" > /sys/devices/system/cpu/intel_pstate/no_turbo
 
 #rm ANYKERNEL/Image.gz-dtb
-#cp /OUT/arch/arm64/boot/Image.gz-dtb ANYKERNEL/
+
+cp /OUT/arch/arm64/boot/Image.gz-dtb .
+
 #cd ANYKERNEL/
 #rm 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip
 #zip -r9 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip * -x .git README.md *placeholder
 #cp 4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip /home/
-#ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
-#ls -lash ./Image.gz-dtb
+
+ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
+ls -lash ./Image.gz-dtb
+
 #ls -lash ./4.9.232-KERNEL-Blue-Virtual-Dragon_r14+13-AUG-2020-NONDEBUG-OCEAN.zip
 
 echo "YAY"
