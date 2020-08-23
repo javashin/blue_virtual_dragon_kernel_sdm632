@@ -442,7 +442,11 @@ CONFIG_PREEMPT_COUNT=y
 # CONFIG_HZ_100 is not set
 # CONFIG_HZ_250 is not set
 # CONFIG_HZ_300 is not set
+<<<<<<< HEAD
 CONFIG_HZ_750=y
+=======
+# CONFIG_HZ_750 is not set
+>>>>>>> 343e8ac3b9a5... Ultra KSM .
 # CONFIG_HZ_1000 is not set
 CONFIG_HZ=750
 CONFIG_SCHED_HRTICK=y
