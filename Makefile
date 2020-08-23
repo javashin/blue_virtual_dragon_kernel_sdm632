@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 233
-EXTRAVERSION = -BvD-Bliss-Rom_r1
+EXTRAVERSION = -Blue-Virtual-Dragon_rV1+
 NAME = Roaring Lionus
 
 ifdef CONFIG_POLLY_CLANG
@@ -834,6 +834,13 @@ KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
 # See modpost pattern 2
 KBUILD_CFLAGS += $(call cc-option, -mno-global-merge,)
 KBUILD_CFLAGS += $(call cc-option, -fcatch-undefined-behavior)
+KBUILD_CFLAGS += $(call cc-option, -mllvm -polly) \
+		 $(call cc-option, -mllvm -polly-run-dce) \
+		 $(call cc-option, -mllvm -polly-run-inliner) \
+		 $(call cc-option, -mllvm -polly-opt-fusion=max) \
+		 $(call cc-option, -mllvm -polly-ast-use-context) \
+		 $(call cc-option, -mllvm -polly-detect-keep-going) \
+		 $(call cc-option, -mllvm -polly-vectorizer=stripmine)
 else
 
 # These warnings generated too much noise in a regular build.
