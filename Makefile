@@ -1,8 +1,8 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 233
-EXTRAVERSION = -BvD-BaHaMuT_rV17
-NAME = JavaShin-X Blue-Virtual-Dragon Bahamut-KERNEL. jsX-CustoKernal.
+EXTRAVERSION = -BvD-Mythico_rV17
+NAME = JavaShin-X Blue-Virtual-Dragon Kukulkan-KERNEL. jsX-CustoKernal.
 
 
 #KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
