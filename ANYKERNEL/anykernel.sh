@@ -35,8 +35,8 @@ ramdisk_compression=lzma;
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
-set_perm_recursive 0 0 755 644 $ramdisk/*;
-set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
+#set_perm_recursive 0 0 755 644 $ramdisk/*;
+#set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 
 ## AnyKernel install
@@ -61,18 +61,18 @@ dump_boot;
 #append_file fstab.tuna "usbdisk" fstab;
 
 # end ramdisk changes
-ui_print " "
-ui_print "Device: Moto G7 Power (OCEAN)"
-ui_print "Kernel Name: Custo-Kernal-JavaShin-X"
-ui_print "Build User: root = javashin"
-ui_print "KVer: 4.9.233-BvD-BaHaMuT_r16+ jsX-CustoKernal SMP PREEMPT aarch64"
-ui_print "Saturday 22 August 2020"
-ui_print "Toolchain Info:"
-ui_print "Proton clang version 12.0.0 LTO+PGO+POLLY Optimized Build by kdragOn"
-ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-5)"
-ui_print "Cross Linker Gnu Binutils 2.35 (Debian 2.35-5)"
-ui_print "CFLAGS/KBUILD_FLAGS=-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
-ui_print " "
+#ui_print " "
+#ui_print "Device: Moto G7 Power (OCEAN)"
+#ui_print "Kernel Name: Custo-Kernal-JavaShin-X"
+#ui_print "Build User: root = javashin"
+#ui_print "KVer: 4.9.233-BvD-BaHaMuT_r16+ jsX-CustoKernal SMP PREEMPT aarch64"
+#ui_print "Saturday 22 August 2020"
+#ui_print "Toolchain Info:"
+#ui_print "Proton clang version 12.0.0 LTO+PGO+POLLY Optimized Build by kdragOn"
+#ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-5)"
+#ui_print "Cross Linker Gnu Binutils 2.35 (Debian 2.35-5)"
+#ui_print "CFLAGS/KBUILD_FLAGS=-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
+#ui_print " "
 
 
 write_boot;
