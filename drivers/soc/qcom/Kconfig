@@ -927,6 +927,8 @@ config QMP_DEBUGFS_CLIENT
 	  This options enables a driver which allows clients to send messages
 	  to Alway On processor using QMP transport.
 
+config STATE_NOTIFIER
+    bool "State Notifier"
 
 source "drivers/soc/qcom/memshare/Kconfig"
 
