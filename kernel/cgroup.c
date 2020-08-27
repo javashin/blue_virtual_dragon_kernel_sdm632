@@ -6352,10 +6352,6 @@ struct cgroup_subsys_state *css_tryget_online_from_dir(struct dentry *dentry,
 	    !kn || kernfs_type(kn) != KERNFS_DIR)
 		return ERR_PTR(-EBADF);
 
-	/* Don't associate the sock with unrelated interrupted task's cgroup. */
-	if (in_interrupt())
-		return;
-
 	rcu_read_lock();
 
 	/*
