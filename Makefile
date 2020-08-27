@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 234
-EXTRAVERSION = -jsX-BvD_rV2+
+EXTRAVERSION = -Blue-Virtual-Dragon_rV2
 NAME = Roaring Lionus
 
 ifdef CONFIG_POLLY_CLANG
