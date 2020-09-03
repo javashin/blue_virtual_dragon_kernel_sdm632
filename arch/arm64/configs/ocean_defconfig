@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.234-jsX-BvD_rV2+ Kernel Configuration
+# Linux/arm64 4.9.235-jsX-BvD_rV3+ Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
