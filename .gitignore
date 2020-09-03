@@ -39,7 +39,8 @@ Module.symvers
 *.dwo
 *.su
 *.c.[012]*.*
-
+*.rej
+*.patch
 #
 # Top-level generic files
 #
