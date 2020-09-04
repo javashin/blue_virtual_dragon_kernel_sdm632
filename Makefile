@@ -1,17 +1,17 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 235
-EXTRAVERSION = -BvD-Mythico_rV17
-NAME = JavaShin-X Blue-Virtual-Dragon Kukulkan-KERNEL. jsX-CustoKernal.
+EXTRAVERSION = -BvD-WyVeRn_rV20
+NAME = JavaShin-X Blue-Virtual-Dragon Bahamut-KERNEL. jsX-CustoKernal.
 
 
-#KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
-#KBUILD_CFLAGS += $(call cc-option,-mcpu=kyro,$(call cc-option,-mcpu=cortex-a73.cortex-a53 -march=armv8-a+fp+simd+crc+crypto,-march=armv8-a+fp+simd+crc+crypto))
+KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS += $(call cc-option,-mcpu=kyro,$(call cc-option,-mcpu=cortex-a73.cortex-a53 -march=armv8-a+fp+simd+crc+crypto,-march=armv8-a+fp+simd+crc+crypto))
 
 # Or armv8-a Compile fine.
-#ifeq ($(cc-name),clang)
-#KBUILD_CFLAGS   += -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo
-#endif
+ifeq ($(cc-name),clang)
+KBUILD_CFLAGS   += -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo
+endif
 
 ifdef CONFIG_POLLY_CLANG
 KBUILD_CFLAGS	+= -mllvm -polly \
@@ -408,7 +408,7 @@ LINUXINCLUDE	+= $(filter-out $(LINUXINCLUDE),$(USERINCLUDE))
 
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
-KBUILD_CFLAGS   := -O3 -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+KBUILD_CFLAGS   := -O3 -Wno-error -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
                    -fno-strict-aliasing -fno-common \
                    -Werror-implicit-function-declaration \
                    -std=gnu89 -fdiagnostics-color=always -fno-stack-protector -pipe
@@ -422,9 +422,9 @@ KBUILD_CFLAGS   := -O3 -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 KBUILD_CPPFLAGS := -D__KERNEL__
 
 # Flags to tune generated code for Cortex-A53 CPU
-KBUILD_CFLAGS += -march=armv8-a -mtune=cortex-a53
-KBUILD_CFLAGS += -march=armv8-a -mtune=cortex-a73
-KBUILD_CFLAGS += -march=armv8-a -mtune=kryo
+#KBUILD_CFLAGS += -march=armv8-a -mtune=cortex-a53
+#KBUILD_CFLAGS += -march=armv8-a -mtune=cortex-a73
+#KBUILD_CFLAGS += -march=armv8-a -mtune=kryo
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
@@ -869,7 +869,7 @@ KBUILD_CFLAGS += $(call cc-option, -Wno-sometimes-uninitialized)
 KBUILD_CFLAGS += $(call cc-option, -Wstring-concatenation)
 KBUILD_CFLAGS += -Wno-asm-operand-widths
 KBUILD_CFLAGS += -Wno-initializer-overrides
-KBUILD_CFLAGS += -fno-builtin
+#KBUILD_CFLAGS += -fno-builtin
 
 # Quiet clang warning: comparison of unsigned expression < 0 is always false
 KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
