@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.234-jsX-BvD_rV2+ Kernel Configuration
+# Linux/arm64 4.9.235-jsX-BvD_rV3+ Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -3587,7 +3587,7 @@ CONFIG_LEDS_TRIGGER_TIMER=y
 #
 # iptables trigger is under Netfilter config (LED target)
 #
-CONFIG_LEDS_TRIGGER_TRANSIENT=y
+# CONFIG_LEDS_TRIGGER_TRANSIENT is not set
 # CONFIG_LEDS_TRIGGER_CAMERA is not set
 # CONFIG_LEDS_TRIGGER_PANIC is not set
 # CONFIG_ACCESSIBILITY is not set
