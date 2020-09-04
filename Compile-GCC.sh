@@ -115,9 +115,9 @@ cp ./dtbo.img ./Image.gz-dtb ANYKERNEL/
 
 cd ANYKERNEL/
 rm 4.9.2*.zip
-zip -r9 4.9.235-BvD-WyVeRn_rV20+OCEAN-Fri-September-04-2020-CAF.zip * -x .git README.md *placeholder
-cp 4.9.235-BvD-WyVeRn_rV20+OCEAN-Fri-September-04-2020-CAF.zip /home/javashin/Desktop/
-ls -lash 4.9.235-BvD-WyVeRn_rV20+OCEAN-Fri-September-04-2020-CAF.zip ; pwd ; cd .. ; pwd
+zip -r9 4.9.235-BvD-Amphithere_rV20+OCEAN-Fri-September-04-2020-CAF.zip * -x .git README.md *placeholder
+cp 4.9.235-BvD-Amphithere_rV20+OCEAN-Fri-September-04-2020-CAF.zip /home/javashin/Desktop/
+ls -lash 4.9.235-BvD-Amphithere_rV20+OCEAN-Fri-September-04-2020-CAF.zip ; pwd ; cd .. ; pwd
 
 
 

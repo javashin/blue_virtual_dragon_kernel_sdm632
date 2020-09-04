@@ -1,8 +1,8 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 235
-EXTRAVERSION = -BvD-WyVeRn_rV20
-NAME = JavaShin-X Blue-Virtual-Dragon Bahamut-KERNEL. jsX-CustoKernal.
+EXTRAVERSION = -BvD-Amphithere_rV20
+NAME = JavaShin-X Blue-Virtual-Dragon Amphithere-KERNEL. jsX-CustoKernal.
 
 
 KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
