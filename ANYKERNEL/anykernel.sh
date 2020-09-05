@@ -6,7 +6,8 @@
 properties() { '
 kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
 do.devicecheck=1
-do.modules=1
+do.modules=0
+do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
 device.name1=ocean
@@ -15,13 +16,13 @@ supported.patchlevels=
 '; } # end properties
 
 # shell variables
-#block=/dev/block/mmcblk0p42;
-#is_slot_device=1;
-#ramdisk_compression=lzma;
-
-block=/dev/block/by-name/boot;
-is_slot_device=auto;
+block=/dev/block/mmcblk0p42;
+is_slot_device=1;
 ramdisk_compression=lzma;
+
+#block=/dev/block/by-name/boot;
+#is_slot_device=auto;
+#ramdisk_compression=lzma;
 
 ## AnyKernel methods (DO NOT CHANGE)
 # import patching functions/variables - see for reference
@@ -30,8 +31,8 @@ ramdisk_compression=lzma;
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
-set_perm_recursive 0 0 755 644 $ramdisk/*;
-set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
+#set_perm_recursive 0 0 755 644 $ramdisk/*;
+#set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 
 ## AnyKernel install
