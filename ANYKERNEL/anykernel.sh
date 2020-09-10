@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
+kernel.string=-#- JavaShin-X KERNEL Hydra Stock Q Blue-Virtual-Dragon MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
 do.devicecheck=1
 do.modules=1
 do.cleanup=1
