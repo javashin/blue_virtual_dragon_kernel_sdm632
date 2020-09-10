@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 235
-EXTRAVERSION = -BvD-WyVeRn_rV20
+EXTRAVERSION = -BvD-HyDrA_rV20
 NAME = JavaShin-X Blue-Virtual-Dragon Bahamut-KERNEL. jsX-CustoKernal.
 
 
@@ -723,8 +723,8 @@ endif
 ifeq ($(cc-name),clang)
 ifeq ($(ld-name),lld)
 KBUILD_CFLAGS	+= -fuse-ld=lld
-KBUILD_LDFLAGS	+= -O2
-LDFLAGS_vmlinux	+= $(call ld-option, -O2,)
+KBUILD_LDFLAGS	+= -O3
+LDFLAGS_vmlinux	+= $(call ld-option, -O3,)
 LLVM_AR         := llvm-ar
 LLVM_DIS        := llvm-dis
 LLVM_NM         := llvm-nm
