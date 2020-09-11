@@ -4,25 +4,25 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon -WENO- MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
+kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon -WENO- MSM-4.9-r27 Branch For Moto G7 RIVER -#-
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
 do.systemless=1
 do.cleanuponabort=0
-device.name1=ocean
+device.name1=river
 supported.versions=
 supported.patchlevels=
 '; } # end properties
 
 # shell variables
-#block=/dev/block/mmcblk0p42;
-#is_slot_device=1;
-#ramdisk_compression=lzma;
-
-block=/dev/block/by-name/boot;
-is_slot_device=auto;
+block=/dev/block/mmcblk0p42;
+is_slot_device=1;
 ramdisk_compression=lzma;
+
+#block=/dev/block/by-name/boot;
+#is_slot_device=auto;
+#ramdisk_compression=lzma;
 
 ## AnyKernel methods (DO NOT CHANGE)
 # import patching functions/variables - see for reference
@@ -58,10 +58,10 @@ dump_boot;
 
 # end ramdisk changes
 ui_print " "
-ui_print "Device: Moto G7 Power (OCEAN)"
+ui_print "Device: Moto G7 (RIVER)"
 ui_print "Kernel Name: -WENO- Custo-Kernal-JavaShin-X"
 ui_print "Build User: root = javashin"
-ui_print "KVer: 4.9.235-jsX-BvD_rV4+ jsX-Ocean SMP PREEMPT aarch64"
+ui_print "KVer: 4.9.235-jsX-BvD_rV4+ jsX-River SMP PREEMPT aarch64"
 ui_print "Friday 11 September 2020"
 ui_print "Toolchain Info:"
 ui_print "Blue-Virtual-Dragon GCC 10.2.0 LTO+PGO+GRAPHITE Riced Optimized"
