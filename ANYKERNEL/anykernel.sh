@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
+kernel.string=-#- JavaShin-X KERNEL Blue-Virtual-Dragon -WENO- MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
@@ -31,8 +31,8 @@ ramdisk_compression=lzma;
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
-set_perm_recursive 0 0 755 644 $ramdisk/*;
-set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
+#set_perm_recursive 0 0 755 644 $ramdisk/*;
+#set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 
 ## AnyKernel install
@@ -57,18 +57,22 @@ dump_boot;
 #append_file fstab.tuna "usbdisk" fstab;
 
 # end ramdisk changes
-#ui_print " "
-#ui_print "Device: Moto G7 Power (OCEAN)"
-#ui_print "Kernel Name: Custo-Kernal-JavaShin-X"
-#ui_print "Build User: root = javashin"
-#ui_print "KVer: 4.9.233-BvD-BaHaMuT_r16+ jsX-CustoKernal SMP PREEMPT aarch64"
-#ui_print "Saturday 22 August 2020"
-#ui_print "Toolchain Info:"
-#ui_print "Proton clang version 12.0.0 LTO+PGO+POLLY Optimized Build by kdragOn"
-#ui_print "Cross 64bits/aarch64-linux-gnu-gcc version 10.2.0 (Debian 10.2.0-5)"
-#ui_print "Cross Linker Gnu Binutils 2.35 (Debian 2.35-5)"
-#ui_print "CFLAGS/KBUILD_FLAGS=-O3 -mllvm -polly -fno-stack-protector -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo"
-#ui_print " "
+ui_print " "
+ui_print "Device: Moto G7 Power (OCEAN)"
+ui_print "Kernel Name: -WENO- Custo-Kernal-JavaShin-X"
+ui_print "Build User: root = javashin"
+ui_print "KVer: 4.9.235-jsX-BvD_rV4+ jsX-Ocean SMP PREEMPT aarch64"
+ui_print "Friday 11 September 2020"
+ui_print "Toolchain Info:"
+ui_print "Blue-Virtual-Dragon GCC 10.2.0 LTO+PGO+GRAPHITE Riced Optimized"
+ui_print "aarch64-unknown-linux-gnu-gcc -v & armv7-unknown-linux-gnueabihf-gcc -v"
+ui_print "gcc version 10.2.0 (Gentoo 10.2.0-r1 p2)"
+ui_print "aarch64-unknown-linux-gnu-ld -v & armv7-unknown-linux-gnueabihf-ld -v"
+ui_print "Blue-Virtual-Dragon GCC 10.2.0 LTO+PGO+GRAPHITE Riced Optimized"
+ui_print "Blue-Virtual-Dragon Binutils 2.35.0 LTO+PGO+GRAPHITE Riced Optimized"
+ui_print "GNU ld (Gentoo 2.35 p1) 2.35.0"
+ui_print "CFLAGS/KBUILD_FLAGS=-O3 -march=armv8-a+fp+simd+crc+crypto -mcpu=cortex-a73.cortex-a53 -mtune=cortex-a73.cortex-a53 -falign-functions=32 -flimit-function-alignment -fno-math-errno -fno-trapping-math -fgraphite-identity -floop-nest-optimize -fno-stack-protector -fno-strict-aliasing --param=inline-min-speedup=15 --param=max-inline-insns-single=200 --param=max-inline-insns-auto=30 --param=early-inlining-insns=1"
+ui_print " "
 
 
 write_boot;
