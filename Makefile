@@ -4,7 +4,6 @@ SUBLEVEL = 236
 EXTRAVERSION = -jsX-BvD_rV5
 NAME = JavaShin-X Blue-Virtual-Dragon. jsX-CustoKernal.
 
-
 KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
 KBUILD_CFLAGS += $(call cc-option,-mcpu=kyro,$(call cc-option,-mcpu=cortex-a73.cortex-a53 -march=armv8-a+fp+simd+crc+crypto,-march=armv8-a+fp+simd+crc+crypto))
 
