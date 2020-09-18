@@ -2,7 +2,7 @@ VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 237
 EXTRAVERSION = -BvD-FaLkOr_rV23
-NAME = JavaShin-X Blue-Virtual-Dragon Bahamut-KERNEL. jsX-CustoKernal.
+NAME = JavaShin-X Blue-Virtual-Dragon Experimental-KERNEL. jsX-CustoKernal.
 
 KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
 KBUILD_CFLAGS += $(call cc-option,-mcpu=kyro,$(call cc-option,-mcpu=cortex-a73.cortex-a53 -march=armv8-a+fp+simd+crc+crypto,-march=armv8-a+fp+simd+crc+crypto))

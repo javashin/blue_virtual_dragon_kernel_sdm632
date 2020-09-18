@@ -392,6 +392,7 @@ bool same_schedtune(struct task_struct *tsk1, struct task_struct *tsk2) {
 
 void update_cgroup_boost_settings(void) {
   int i;
+}
 
   for (i = 0; i < BOOSTGROUPS_COUNT; i++) {
     if (!allocated_group[i])
@@ -678,6 +679,23 @@ static int sched_colocate_write(struct cgroup_subsys_state *css,
   st->colocate = !!colocate;
   st->colocate_update_disabled = true;
   return 0;
+}
+
+bool schedtune_task_colocated(struct task_struct *p)
+{
+	struct schedtune *st;
+	bool colocated;
+
+	if (unlikely(!schedtune_initialized))
+		return false;
+
+	/* Get task boost value */
+	rcu_read_lock();
+	st = task_schedtune(p);
+	colocated = st->colocate;
+	rcu_read_unlock();
+
+	return colocated;
 }
 
 #else /* CONFIG_SCHED_WALT */
