@@ -1,7 +1,7 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 237
-EXTRAVERSION = -BvD-KingGhidorah_rV22
+EXTRAVERSION = -Pre-BvD-KingGhidorah_rV22
 NAME = JavaShin-X Blue-Virtual-Dragon Experimental-KERNEL. jsX-CustoKernal.
 
 KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
