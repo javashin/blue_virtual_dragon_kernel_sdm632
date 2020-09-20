@@ -111,12 +111,12 @@ ls -lash ./Image.gz-dtb
 cp ./Image.gz-dtb ANYKERNEL/
 #cp ./wlan.ko ANYKERNEL/modules/system/lib/modules/pronto/pronto_wlan.ko
 
-cd ANYKERNEL/
-rm ./dtbo.img
-rm 4.9.2*.zip
-zip -r9 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip * -x .git README.md *placeholder
-cp 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip /home/javashin/Desktop/
-ls -lash 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip ; pwd ; cd .. ; pwd
+#cd ANYKERNEL/
+#rm ./dtbo.img
+#rm 4.9.2*.zip
+#zip -r9 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip * -x .git README.md *placeholder
+#cp 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip /home/javashin/Desktop/
+#ls -lash 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip ; pwd ; cd .. ; pwd
 
 
 

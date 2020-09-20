@@ -392,7 +392,6 @@ bool same_schedtune(struct task_struct *tsk1, struct task_struct *tsk2) {
 
 void update_cgroup_boost_settings(void) {
   int i;
-}
 
   for (i = 0; i < BOOSTGROUPS_COUNT; i++) {
     if (!allocated_group[i])
