@@ -102,21 +102,21 @@ ls -lash ./Image.gz-dtb
 #ls -lash /OUT/drivers/staging/prima/wlan.ko
 #ls -lash  ./wlan.ko
 
-#python2 libufdt/src/mkdtboimg.py create /OUT/arch/arm64/boot/dtbo.img /OUT/arch/arm64/boot/dts/qcom/*.dtbo
-#cp /OUT/arch/arm64/boot/dtbo.img .
-#ls -lash /OUT/arch/arm64/boot/dtbo.img
-#ls -lash  ./dtbo.img
+python2 libufdt/src/mkdtboimg.py create /OUT/arch/arm64/boot/dtbo.img /OUT/arch/arm64/boot/dts/qcom/*.dtbo
+cp /OUT/arch/arm64/boot/dtbo.img .
+ls -lash /OUT/arch/arm64/boot/dtbo.img
+ls -lash  ./dtbo.img
 
 #cp ./dtbo.img
 cp ./Image.gz-dtb ANYKERNEL/
 #cp ./wlan.ko ANYKERNEL/modules/system/lib/modules/pronto/pronto_wlan.ko
 
-#cd ANYKERNEL/
+cd ANYKERNEL/
 #rm ./dtbo.img
-#rm 4.9.2*.zip
-#zip -r9 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip * -x .git README.md *placeholder
-#cp 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip /home/javashin/Desktop/
-#ls -lash 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip ; pwd ; cd .. ; pwd
+rm 4.9.2*.zip
+zip -r9 4.9.237-BvD-FaLkOr_rV23+OCEAN-Wed-September-23-2020.zip * -x .git README.md *placeholder
+cp 4.9.237-BvD-FaLkOr_rV23+OCEAN-Wed-September-23-2020.zip /home/javashin/Desktop/
+ls -lash 4.9.237-BvD-FaLkOr_rV23+OCEAN-Wed-September-23-2020.zip ; pwd ; cd .. ; pwd
 
 
 

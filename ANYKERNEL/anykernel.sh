@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-#- 4.9.237-Pre-BvD-KingGhidorah_rV22+ Experimental AOSP MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
+kernel.string=-#- 4.9.237-BvD-FaLkOr_rV23+ Experimental AOSP MSM-4.9-r27 Branch For Moto G7 Power Ocean -#-
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
@@ -30,8 +30,8 @@ ui_print " "
 ui_print "Device: Moto G7 Power (OCEAN)"
 ui_print "Kernel Name: Blue Virtual Dragon King Ghidorah "
 ui_print "Build User: root = javashin"
-ui_print "KVer:  4.9.237-Pre-BvD-KingGhidorah_rV22+ jsX-Ocean SMP PREEMPT aarch64"
-ui_print "Saturday 19 September 2020"
+ui_print "KVer:  4.9.237-BvD-FaLkOr_rV23+ jsX-Ocean SMP PREEMPT aarch64"
+ui_print "Wed 23 September 2020"
 ui_print "Toolchain Info:"
 ui_print "Blue-Virtual-Dragon Gentoo GCC 11.0.0 LTO+PGO+GRAPHITE Riced Optimized"
 ui_print "aarch64-unknown-linux-gnu-gcc -v & armv7-unknown-linux-gnueabihf-gcc -v"
