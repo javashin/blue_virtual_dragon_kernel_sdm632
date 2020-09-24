@@ -66,6 +66,7 @@
 #include <linux/kexec.h>
 #include <linux/bpf.h>
 #include <linux/mount.h>
+#include <linux/tty.h>
 
 #include <asm/uaccess.h>
 #include <asm/processor.h>
@@ -107,6 +108,9 @@ extern int suid_dumpable;
 extern int core_uses_pid;
 extern char core_pattern[];
 extern unsigned int core_pipe_limit;
+#endif
+#ifdef CONFIG_USER_NS
+extern int unprivileged_userns_clone;
 #endif
 extern int pid_max;
 extern int pid_max_min, pid_max_max;
@@ -636,6 +640,15 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 #endif
+#ifdef CONFIG_USER_NS
+	{
+		.procname	= "unprivileged_userns_clone",
+		.data		= &unprivileged_userns_clone,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec,
+	},
+#endif
 #ifdef CONFIG_PROC_SYSCTL
 	{
 		.procname	= "tainted",
@@ -850,6 +863,17 @@ static struct ctl_table kern_table[] = {
 		.maxlen		= sizeof (int),
 		.mode		= 0600,
 		.proc_handler	= proc_do_cad_pid,
+	},
+#endif
+#if defined CONFIG_TTY
+	{
+		.procname	= "tiocsti_restrict",
+		.data		= &tiocsti_restrict,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec_minmax_sysadmin,
+		.extra1		= &zero,
+		.extra2		= &one,
 	},
 #endif
 	{

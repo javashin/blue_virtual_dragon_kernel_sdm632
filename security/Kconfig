@@ -13,7 +13,7 @@ endif
 
 config SECURITY_DMESG_RESTRICT
 	bool "Restrict unprivileged access to the kernel syslog"
-	default n
+	default y
 	help
 	  This enforces restrictions on unprivileged users reading the kernel
 	  syslog via dmesg(8).
@@ -26,16 +26,31 @@ config SECURITY_DMESG_RESTRICT
 config SECURITY_PERF_EVENTS_RESTRICT
 	bool "Restrict unprivileged use of performance events"
 	depends on PERF_EVENTS
+	default y
 	help
 	  If you say Y here, the kernel.perf_event_paranoid sysctl
 	  will be set to 3 by default, and no unprivileged use of the
 	  perf_event_open syscall will be permitted unless it is
 	  changed.
 
+config SECURITY_TIOCSTI_RESTRICT
+	bool "Restrict unprivileged use of tiocsti command injection"
+	default y
+	help
+	  This enforces restrictions on unprivileged users injecting commands
+	  into other processes which share a tty session using the TIOCSTI
+	  ioctl. This option makes TIOCSTI use require CAP_SYS_ADMIN.
+
+	  If this option is not selected, no restrictions will be enforced
+	  unless the tiocsti_restrict sysctl is explicitly set to (1).
+
+	  If you are unsure how to answer this question, answer N.
+
 config SECURITY
 	bool "Enable different security models"
 	depends on SYSFS
 	depends on MULTIUSER
+	default y
 	help
 	  This allows you to choose different security modules to be
 	  configured into your kernel.
@@ -72,6 +87,7 @@ config SECURITYFS
 config SECURITY_NETWORK
 	bool "Socket and Networking Security Hooks"
 	depends on SECURITY
+	default y
 	help
 	  This enables the socket and networking security hooks.
 	  If enabled, a security module can use these hooks to
@@ -190,6 +206,7 @@ config HARDENED_USERCOPY_PAGESPAN
 config FORTIFY_SOURCE
 	bool "Harden common str/mem functions against buffer overflows"
 	depends on ARCH_HAS_FORTIFY_SOURCE
+	default y
 	help
 	  Detect overflows of buffers in common string and memory functions
 	  where the compiler can determine and validate the buffer sizes.

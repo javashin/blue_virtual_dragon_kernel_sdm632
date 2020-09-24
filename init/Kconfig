@@ -309,6 +309,7 @@ config USELIB
 config AUDIT
 	bool "Auditing support"
 	depends on NET
+	default y
 	help
 	  Enable auditing infrastructure that can be used with another
 	  kernel subsystem, such as SELinux (which requires this for
@@ -1391,6 +1392,22 @@ config USER_NS
 
 	  If unsure, say N.
 
+config USER_NS_UNPRIVILEGED
+	bool "Allow unprivileged users to create namespaces"
+	depends on USER_NS
+	default n
+	help
+	  When disabled, unprivileged users will not be able to create
+	  new namespaces. Allowing users to create their own namespaces
+	  has been part of several recent local privilege escalation
+	  exploits, so if you need user namespaces but are
+	  paranoid^Wsecurity-conscious you want to disable this.
+
+	  This setting can be overridden at runtime via the
+	  kernel.unprivileged_userns_clone sysctl.
+
+	  If unsure, say N.
+
 config PID_NS
 	bool "PID Namespaces"
 	default y
@@ -1550,6 +1567,12 @@ config CC_OPTIMIZE_FOR_SIZE
 	  If unsure, say N.
 
 endchoice
+
+config LOCAL_INIT
+	bool "Zero uninitialized locals"
+	help
+	  Zero-fill uninitialized local variables, other than variable-length
+	  arrays. Requires compiler support.
 
 config SYSCTL
 	bool
@@ -1830,8 +1853,7 @@ config SHMEM
 	  which may be appropriate on small systems without swap.
 
 config AIO
-	bool "Enable AIO support" if EXPERT
-	default y
+	bool "Enable AIO support"
 	help
 	  This option enables POSIX asynchronous I/O which may by used
 	  by some high performance threaded applications. Disabling
@@ -1961,7 +1983,7 @@ config VM_EVENT_COUNTERS
 
 config SLUB_DEBUG
 	default y
-	bool "Enable SLUB debugging support" if EXPERT
+	bool "Enable SLUB debugging support"
 	depends on SLUB && SYSFS
 	help
 	  SLUB has extensive debug support features. Disabling these can
@@ -1985,7 +2007,6 @@ config SLUB_MEMCG_SYSFS_ON
 
 config COMPAT_BRK
 	bool "Disable heap randomization"
-	default y
 	help
 	  Randomizing heap placement makes heap exploits harder, but it
 	  also breaks ancient binaries (including anything libc5 based).

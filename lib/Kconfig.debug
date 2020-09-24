@@ -938,6 +938,7 @@ endmenu # "Debug lockups and hangs"
 
 config PANIC_ON_OOPS
 	bool "Panic on Oops"
+	default y
 	help
 	  Say Y here to enable the kernel to panic when it oopses. This
 	  has the same effect as setting oops=panic on the kernel command
@@ -947,7 +948,7 @@ config PANIC_ON_OOPS
 	  anything erroneous after an oops which could result in data
 	  corruption or other issues.
 
-	  Say N if unsure.
+	  Say Y if unsure.
 
 config PANIC_ON_OOPS_VALUE
 	int
@@ -2133,7 +2134,7 @@ config STRICT_DEVMEM
 	bool "Filter access to /dev/mem"
 	depends on MMU
 	depends on ARCH_HAS_DEVMEM_IS_ALLOWED
-	default y if TILE || PPC
+	default y
 	---help---
 	  If this option is disabled, you allow userspace (root) access to all
 	  of memory, including kernel and userspace memory. Accidental
@@ -2152,6 +2153,7 @@ config STRICT_DEVMEM
 config IO_STRICT_DEVMEM
 	bool "Filter I/O access to /dev/mem"
 	depends on STRICT_DEVMEM
+	default y
 	---help---
 	  If this option is disabled, you allow userspace (root) access to all
 	  io-memory regardless of whether a driver is actively using that
