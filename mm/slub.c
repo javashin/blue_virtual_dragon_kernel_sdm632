@@ -34,6 +34,7 @@
 #include <linux/stacktrace.h>
 #include <linux/prefetch.h>
 #include <linux/memcontrol.h>
+#include <linux/random.h>
 
 #include <trace/events/kmem.h>
 
@@ -122,6 +123,16 @@ static inline int kmem_cache_debug(struct kmem_cache *s)
 #else
 	return 0;
 #endif
+}
+
+static inline bool has_sanitize(struct kmem_cache *s)
+{
+	return IS_ENABLED(CONFIG_SLAB_SANITIZE) && !(s->flags & (SLAB_DESTROY_BY_RCU | SLAB_POISON));
+}
+
+static inline bool has_sanitize_verify(struct kmem_cache *s)
+{
+	return IS_ENABLED(CONFIG_SLAB_SANITIZE_VERIFY) && has_sanitize(s);
 }
 
 void *fixup_red_left(struct kmem_cache *s, void *p)
@@ -236,9 +247,32 @@ static inline void stat(const struct kmem_cache *s, enum stat_item si)
  * 			Core slab cache functions
  *******************************************************************/
 
+/*
+ * Returns freelist pointer (ptr). With hardening, this is obfuscated
+ * with an XOR of the address where the pointer is held and a per-cache
+ * random number.
+ */
+static inline void *freelist_ptr(const struct kmem_cache *s, void *ptr,
+				 unsigned long ptr_addr)
+{
+#ifdef CONFIG_SLAB_FREELIST_HARDENED
+	return (void *)((unsigned long)ptr ^ s->random ^ ptr_addr);
+#else
+	return ptr;
+#endif
+}
+
+/* Returns the freelist pointer recorded at location ptr_addr. */
+static inline void *freelist_dereference(const struct kmem_cache *s,
+					 void *ptr_addr)
+{
+	return freelist_ptr(s, (void *)*(unsigned long *)(ptr_addr),
+			    (unsigned long)ptr_addr);
+}
+
 static inline void *get_freepointer(struct kmem_cache *s, void *object)
 {
-	return *(void **)(object + s->offset);
+	return freelist_dereference(s, object + s->offset);
 }
 
 static void prefetch_freepointer(const struct kmem_cache *s, void *object)
@@ -248,18 +282,26 @@ static void prefetch_freepointer(const struct kmem_cache *s, void *object)
 
 static inline void *get_freepointer_safe(struct kmem_cache *s, void *object)
 {
+	unsigned long freepointer_addr;
 	void *p;
 
 	if (!debug_pagealloc_enabled())
 		return get_freepointer(s, object);
 
-	probe_kernel_read(&p, (void **)(object + s->offset), sizeof(p));
-	return p;
+	freepointer_addr = (unsigned long)object + s->offset;
+	probe_kernel_read(&p, (void **)freepointer_addr, sizeof(p));
+	return freelist_ptr(s, p, freepointer_addr);
 }
 
 static inline void set_freepointer(struct kmem_cache *s, void *object, void *fp)
 {
-	*(void **)(object + s->offset) = fp;
+	unsigned long freeptr_addr = (unsigned long)object + s->offset;
+
+#ifdef CONFIG_SLAB_FREELIST_HARDENED
+	BUG_ON(object == fp); /* naive detection of double free or corruption */
+#endif
+
+	*(void **)freeptr_addr = freelist_ptr(s, fp, freeptr_addr);
 }
 
 /* Loop over all objects in a slab */
@@ -1415,7 +1457,7 @@ static void setup_object(struct kmem_cache *s, struct page *page,
 {
 	setup_object_debug(s, page, object);
 	kasan_init_slab_obj(s, object);
-	if (unlikely(s->ctor)) {
+	if (unlikely(s->ctor) && !has_sanitize_verify(s)) {
 		kasan_unpoison_object_data(s, object);
 		s->ctor(object);
 		kasan_poison_object_data(s, object);
@@ -2757,7 +2799,14 @@ redo:
 		stat(s, ALLOC_FASTPATH);
 	}
 
-	if (unlikely(gfpflags & __GFP_ZERO) && object)
+	if (has_sanitize_verify(s) && object) {
+		size_t offset = s->offset ? 0 : sizeof(void *);
+		BUG_ON(memchr_inv(object + offset, 0, s->object_size - offset));
+		if (s->ctor)
+			s->ctor(object);
+		if (unlikely(gfpflags & __GFP_ZERO) && offset)
+			memset(object, 0, sizeof(void *));
+	} else if (unlikely(gfpflags & __GFP_ZERO) && object)
 		memset(object, 0, s->object_size);
 
 	slab_post_alloc_hook(s, gfpflags, 1, &object);
@@ -2966,6 +3015,21 @@ static __always_inline void do_slab_free(struct kmem_cache *s,
 	void *tail_obj = tail ? : head;
 	struct kmem_cache_cpu *c;
 	unsigned long tid;
+
+	if (has_sanitize(s)) {
+		int offset = s->offset ? 0 : sizeof(void *);
+		void *x = head;
+
+		while (1) {
+			memset(x + offset, 0, s->object_size - offset);
+			if (!IS_ENABLED(CONFIG_SLAB_SANITIZE_VERIFY) && s->ctor)
+				s->ctor(x);
+			if (x == tail_obj)
+				break;
+			x = get_freepointer(s, x);
+		}
+	}
+
 redo:
 	/*
 	 * Determine the currently cpus per cpu slab.
@@ -3201,7 +3265,18 @@ int kmem_cache_alloc_bulk(struct kmem_cache *s, gfp_t flags, size_t size,
 	local_irq_enable();
 
 	/* Clear memory outside IRQ disabled fastpath loop */
-	if (unlikely(flags & __GFP_ZERO)) {
+	if (has_sanitize_verify(s)) {
+		int j;
+
+		for (j = 0; j < i; j++) {
+			size_t offset = s->offset ? 0 : sizeof(void *);
+			BUG_ON(memchr_inv(p[j] + offset, 0, s->object_size - offset));
+			if (s->ctor)
+				s->ctor(p[j]);
+			if (unlikely(flags & __GFP_ZERO) && offset)
+				memset(p[j], 0, sizeof(void *));
+		}
+	} else if (unlikely(flags & __GFP_ZERO)) {
 		int j;
 
 		for (j = 0; j < i; j++)
@@ -3601,6 +3676,9 @@ static int kmem_cache_open(struct kmem_cache *s, unsigned long flags)
 {
 	s->flags = kmem_cache_flags(s->size, flags, s->name, s->ctor);
 	s->reserved = 0;
+#ifdef CONFIG_SLAB_FREELIST_HARDENED
+	s->random = get_random_long();
+#endif
 
 	if (need_reserve_slab_rcu && (s->flags & SLAB_DESTROY_BY_RCU))
 		s->reserved = sizeof(struct rcu_head);
@@ -3908,7 +3986,11 @@ static size_t __ksize(const void *object)
 	page = virt_to_head_page(object);
 
 	if (unlikely(!PageSlab(page))) {
+#ifdef CONFIG_PANIC_ON_DATA_CORRUPTION
+		BUG_ON(!PageCompound(page));
+#else
 		WARN_ON(!PageCompound(page));
+#endif
 		return PAGE_SIZE << compound_order(page);
 	}
 
