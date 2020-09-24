@@ -114,9 +114,9 @@ cp ./Image.gz-dtb ANYKERNEL/
 cd ANYKERNEL/
 rm ./dtbo.img
 rm 4.9.2*.zip
-zip -r9 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip * -x .git README.md *placeholder
-cp 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip /home/javashin/Desktop/
-ls -lash 4.9.237-Pre-jsX-BvD_rV6+OCEAN-Fri-September-18-2020.zip ; pwd ; cd .. ; pwd
+zip -r9 4.9.237-jsX-BvD_rV7+OCEAN-Wed-September-23-2020.zip * -x .git README.md *placeholder
+cp 4.9.237-jsX-BvD_rV7+OCEAN-Wed-September-23-2020.zip /home/javashin/Desktop/
+ls -lash 4.9.237-jsX-BvD_rV7+OCEAN-Wed-September-23-2020.zip ; pwd ; cd .. ; pwd
 
 
 
