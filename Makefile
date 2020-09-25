@@ -1,10 +1,10 @@
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 237
-EXTRAVERSION = -jsX-BvD_rV7
+EXTRAVERSION = -AndroidHardened
 NAME = JavaShin-X Blue-Virtual-Dragon Weno-KERNEL. jsX-CustoKernal.
 
-KBUILD_CFLAGS   += -O3 $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS   += -O2 $(call cc-disable-warning,maybe-uninitialized,)
 KBUILD_CFLAGS += $(call cc-option,-mcpu=kyro,$(call cc-option,-mcpu=cortex-a73.cortex-a53 -march=armv8-a+fp+simd+crc+crypto,-march=armv8-a+fp+simd+crc+crypto))
 
 # Or armv8-a Compile fine.
@@ -12,16 +12,16 @@ ifeq ($(cc-name),clang)
 KBUILD_CFLAGS   += -march=armv8-a+fp+simd+crc+crypto -mcpu=kryo -mtune=kryo
 endif
 
-ifdef CONFIG_POLLY_CLANG
-KBUILD_CFLAGS	+= -mllvm -polly \
-		   -mllvm -polly-run-dce \
-		   -mllvm -polly-run-inliner \
-		   -mllvm -polly-opt-fusion=max \
-		   -mllvm -polly-ast-use-context \
-		   -mllvm -polly-detect-keep-going \
-		   -mllvm -polly-vectorizer=stripmine \
-		   -mllvm -polly-invariant-load-hoisting
-endif
+#ifdef CONFIG_POLLY_CLANG
+#KBUILD_CFLAGS	+= -mllvm -polly \
+#		   -mllvm -polly-run-dce \
+#		   -mllvm -polly-run-inliner \
+#		   -mllvm -polly-opt-fusion=max \
+#		   -mllvm -polly-ast-use-context \
+#		   -mllvm -polly-detect-keep-going \
+#		   -mllvm -polly-vectorizer=stripmine \
+#		   -mllvm -polly-invariant-load-hoisting
+#endif
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
@@ -322,8 +322,8 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -std=gnu89
-HOSTCXXFLAGS = -O3
+HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89
+HOSTCXXFLAGS = -O2
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -407,10 +407,10 @@ LINUXINCLUDE	+= $(filter-out $(LINUXINCLUDE),$(USERINCLUDE))
 
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
-KBUILD_CFLAGS   := -O3 -Wno-error -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+KBUILD_CFLAGS   := -O2 -Wno-error -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
                    -fno-strict-aliasing -fno-common \
                    -Werror-implicit-function-declaration \
-                   -std=gnu89 -fdiagnostics-color=always -fno-stack-protector -pipe
+                   -std=gnu89 -fdiagnostics-color=always
 
 #KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 #		   -fno-strict-aliasing -fno-common -fshort-wchar \
@@ -722,8 +722,8 @@ endif
 ifeq ($(cc-name),clang)
 ifeq ($(ld-name),lld)
 KBUILD_CFLAGS	+= -fuse-ld=lld
-KBUILD_LDFLAGS	+= -O3
-LDFLAGS_vmlinux	+= $(call ld-option, -O3,)
+KBUILD_LDFLAGS	+= -O2
+LDFLAGS_vmlinux	+= $(call ld-option, -O2,)
 LLVM_AR         := llvm-ar
 LLVM_DIS        := llvm-dis
 LLVM_NM         := llvm-nm
@@ -752,8 +752,8 @@ LLVM_AR         := llvm-ar
 LLVM_DIS        := llvm-dis
 LLVM_NM         := llvm-nm
 export LLVM_AR LLVM_DIS LLVM_NM
-KBUILD_LDFLAGS	+= --lto-O3
-LDFLAGS_vmlinux	+= $(call ld-option, --lto-O3,)
+KBUILD_LDFLAGS	+= --lto-O2
+LDFLAGS_vmlinux	+= $(call ld-option, --lto-O2,)
 endif
 
 DISABLE_LTO	:= $(DISABLE_LTO_CLANG)
@@ -795,9 +795,9 @@ ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
 ifdef CONFIG_PROFILE_ALL_BRANCHES
-KBUILD_CFLAGS	+= -O3 $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS	+= -O2 $(call cc-disable-warning,maybe-uninitialized,)
 else
-KBUILD_CFLAGS   += -O3
+KBUILD_CFLAGS   += -O2
 endif
 endif
 
@@ -878,16 +878,16 @@ KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
 # CLANG uses a _MergedGlobals as optimization, but this breaks modpost, as the
 # source of a reference will be _MergedGlobals and not on of the whitelisted names.
 # See modpost pattern 2
-KBUILD_CFLAGS += $(call cc-option, -mno-global-merge,)
-KBUILD_CFLAGS += $(call cc-option, -fcatch-undefined-behavior)
-KBUILD_CFLAGS += $(call cc-option, -mllvm -polly) \
-		 $(call cc-option, -mllvm -polly-run-dce) \
-		 $(call cc-option, -mllvm -polly-run-inliner) \
-		 $(call cc-option, -mllvm -polly-opt-fusion=max) \
-		 $(call cc-option, -mllvm -polly-ast-use-context) \
-		 $(call cc-option, -mllvm -polly-detect-keep-going) \
-		 $(call cc-option, -mllvm -polly-vectorizer=stripmine)
-else
+#KBUILD_CFLAGS += $(call cc-option, -mno-global-merge,)
+#KBUILD_CFLAGS += $(call cc-option, -fcatch-undefined-behavior)
+#KBUILD_CFLAGS += $(call cc-option, -mllvm -polly) \
+#		 $(call cc-option, -mllvm -polly-run-dce) \
+#		 $(call cc-option, -mllvm -polly-run-inliner) \
+#		 $(call cc-option, -mllvm -polly-opt-fusion=max) \
+#		 $(call cc-option, -mllvm -polly-ast-use-context) \
+#		 $(call cc-option, -mllvm -polly-detect-keep-going) \
+#		 $(call cc-option, -mllvm -polly-vectorizer=stripmine)
+#else
 
 # These warnings generated too much noise in a regular build.
 # Use make W=1 to enable them (see scripts/Makefile.extrawarn)
@@ -908,7 +908,7 @@ KBUILD_CFLAGS	+= -fomit-frame-pointer
 endif
 endif
 
-KBUILD_CFLAGS += -ftrivial-auto-var-init=zero -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang
+#KBUILD_CFLAGS += -ftrivial-auto-var-init=zero -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang
 
 KBUILD_CFLAGS   += $(call cc-option, -fno-var-tracking-assignments)
 

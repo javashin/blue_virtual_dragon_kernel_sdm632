@@ -92,7 +92,6 @@ show up in /proc/sys/kernel:
 - sysctl_writes_strict
 - tainted
 - threads-max
-- tiocsti_restrict
 - unknown_nmi_panic
 - watchdog
 - watchdog_thresh

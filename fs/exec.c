@@ -58,6 +58,8 @@
 #include <linux/compat.h>
 #include <linux/vmalloc.h>
 #include <linux/ksm.h>
+#include <linux/random.h>
+
 
 #include <asm/uaccess.h>
 #include <asm/mmu_context.h>

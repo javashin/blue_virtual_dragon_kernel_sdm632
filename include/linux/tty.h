@@ -339,8 +339,6 @@ struct tty_file_private {
 	struct list_head list;
 };
 
-extern int tiocsti_restrict;
-
 /* tty magic number */
 #define TTY_MAGIC		0x5401
 
