@@ -40,9 +40,9 @@ export HOSTAR=/usr/bin/aarch64-unknown-linux-gnu-gcc-ar
 
 PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- ocean_defconfig
 
-#PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- oldconfig
+PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- oldconfig
 
-#PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- nconfig
+PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- prepare nconfig
 
 
 echo "##################################################"
@@ -53,7 +53,7 @@ echo "Compiling"
 sleep 1
 
 
-PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y KCFLAGS+="-Wno-error -D_FORTIFY_SOURCE=1 -fstack-protector-strong -march=armv8-a+fp+simd+crc+crypto -mcpu=cortex-a73.cortex-a53 -mtune=cortex-a73.cortex-a53" CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- CONFIG_NO_ERROR_ON_MISMATCH=y
+PATH="${PATH}" make -j3 O=/OUT ARCH=arm64 SUBARCH=arm CC=aarch64-unknown-linux-gnu-gcc LD=aarch64-unknown-linux-gnu-ld.bfd CONFIG_BUILD_ARM64_DT_OVERLAY=y KCFLAGS+="-O2 -Wno-error -D_FORTIFY_SOURCE=2 -fstack-protector-strong -march=armv8-a+fp+simd+crc+crypto -mcpu=cortex-a73.cortex-a53 -mtune=cortex-a73.cortex-a53 -pipe" CROSS_COMPILE_ARM32=armv7-unknown-linux-gnueabihf- CROSS_COMPILE=aarch64-unknown-linux-gnu- CONFIG_NO_ERROR_ON_MISMATCH=y
 
 
 echo "##################################################"
@@ -79,16 +79,16 @@ echo "1" > /sys/devices/system/cpu/intel_pstate/no_turbo
 
 ls -lash /OUT/arch/arm64/boot/Image.gz-dtb
 ls -lash ./Image.gz-dtb
-
+rm ANYKERNEL/Image.gz-dtb
 cp ./Image.gz-dtb ANYKERNEL/
 
 
 cd ANYKERNEL/
 rm ./dtbo.img
 rm 4.9.2*.zip
-zip -r9 4.9.237-jsX-AndroidHardened+OCEAN-Fri-September-25-2020-SEC.zip * -x .git README.md *placeholder
-cp 4.9.237-jsX-AndroidHardened+OCEAN-Fri-September-25-2020-SEC.zip /home/javashin/Desktop/
-ls -lash 4.9.237-jsX-AndroidHardened+OCEAN-Fri-September-25-2020-SEC.zip ; pwd ; cd .. ; pwd
+zip -r9 4.9.237-jsX-AndroidHardened+OCEAN-Fri-September-25-2020-SEC-GCC-11-Only.zip * -x .git README.md *placeholder
+cp 4.9.237-jsX-AndroidHardened+OCEAN-Fri-September-25-2020-SEC-GCC-11-Only.zip /home/javashin/Desktop/
+ls -lash 4.9.237-jsX-AndroidHardened+OCEAN-Fri-September-25-2020-SEC-GCC-11-Only.zip ; pwd ; cd .. ; pwd
 
 echo "done"
 
